@@ -1,0 +1,18 @@
+{
+  "name": "jR3DCarousel",
+  "version": "0.0.0",
+  "description": "jQuery Responsive 3D Carousel with modern effects",
+  "main": "jR3DCarousel.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "jR3DCarousel",
+    "Carousel",
+    "3D",
+    "Carousel",
+    "Gallery"
+  ],
+  "author": "Vinayak Rangnathrao Jadhav",
+  "license": "MIT"
+}
