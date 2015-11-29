@@ -12,14 +12,7 @@
     <script type="text/javascript" src="https://cdn.rawgit.com/vinayakjadhav/jR3DCarousel/master/dist/jR3DCarousel.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            var slides = [{src: 'http://lorempixel.com//1366/620'},
-	              {src: 'http://lorempixel.com//1366/621'},
-	              {src: 'http://lorempixel.com//1366/622'},
-	              {src: 'http://lorempixel.com//1366/623'},
-	              {src: 'http://lorempixel.com//1366/624'},
-	              {src: 'http://lorempixel.com//1366/625'},
-	              {src: 'http://lorempixel.com//1366/626'}];
-        	
+            var slides = [];
         	var carouselProps =  {
 			 		  width: 700, 				/* largest allowed width */
 					  height: 320, 				/* largest allowed height */
@@ -55,7 +48,7 @@
 	function getSlides(no){
 		slides = [];
 		for ( var i = 0; i < no; i++) {
-			slides.push({src: 'http://lorempixel.com//'+Math.floor(1366-Math.random()*200)+'/'+Math.floor(768+Math.random()*200)})
+			slides.push({src: 'http://lorempixel.com//'+Math.floor(1366-Math.random()*100)+'/'+Math.floor(768+Math.random()*100)})
 		}
 		return slides;
 	}
