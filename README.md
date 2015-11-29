@@ -21,7 +21,7 @@
 
 npm install jr3dcarousel
 
-#### old school way
+##### old school way
 
 	<!-- add jQuery if not already present in your project -->
 ``` javascript
