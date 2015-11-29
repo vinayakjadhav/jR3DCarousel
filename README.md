@@ -12,8 +12,11 @@
 - Minimal configuration, easy to install
 - Useful public API for extending the functionalities like custom nav buttons.
  
-## Live Demo
-   [Click here](http://vinayakjadhav.github.io/jR3DCarousel/) for live demo.
+## jR3DCarousel Demo
+   [Click here](http://vinayakjadhav.github.io/jR3DCarousel/) for Live demo.
+
+   ![animationnew](https://cloud.githubusercontent.com/assets/7734229/11457324/f46c4d30-96cb-11e5-9281-b0141721b755.gif)
+
 
 ## Installation
 
@@ -80,8 +83,6 @@ $('.jR3DCarouselGallery').jR3DCarousel({
   <div class="slide"><img src="http://lorempixel.com//800/355" /></div>
 </div>
 ```
-## jR3DCarousel Example
-
 ## Public API
 - ##### showSlide(slideIndex) 	:
 		shows the slide specified by the slideIndex by running animation, the slideIndex starts from 0.
