@@ -1,6 +1,8 @@
 # jR3DCarousel
 **j**Query **R**esponsive **3D** **Carousel** - __jR3DCarousel__ by Vinayak Rangnathrao Jadhav
 
+jR3DCarousel is a derived from the origin project - [jRCarousel](https://github.com/vinayakjadhav/jRCarousel)
+
 ###### jR3DCarousel is a jQuery plugin for responsive 3d carousel with modern effects and multiple options.
 
 ## Features
