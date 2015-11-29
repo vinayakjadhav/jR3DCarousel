@@ -1,6 +1,6 @@
 {
   "name": "jr3dcarousel",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "jQuery Responsive 3D Carousel with modern effects",
   "main": "dist/jR3DCarousel.min.js",
   "scripts": {
@@ -9,12 +9,15 @@
   "keywords": [
     "jR3DCarousel",
     "Carousel",
-    "3D",
-    "Carousel",
+    "3D Carousel",
+    "Responsive Carousel",
     "Gallery"
   ],
   "author": "Vinayak Rangnathrao Jadhav",
   "license": "MIT",
+  "dependencies": {
+	    "jquery": "^1.9.1"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/vinayakjadhav/jR3DCarousel"
