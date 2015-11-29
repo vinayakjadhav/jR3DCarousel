@@ -8,10 +8,132 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/vinayakjadhav/jRCarousel/master/dist/jRCarousel.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var slides = [{src: 'http://lorempixel.com//1366/620'},
+	              {src: 'http://lorempixel.com//1366/621'},
+	              {src: 'http://lorempixel.com//1366/622'},
+	              {src: 'http://lorempixel.com//1366/623'},
+	              {src: 'http://lorempixel.com//1366/624'},
+	              {src: 'http://lorempixel.com//1366/625'},
+	              {src: 'http://lorempixel.com//1366/626'}];
+        	
+        	var carouselProps =  {
+			 		  width: 700, 				/* largest allowed width */
+					  height: 292, 				/* largest allowed height */
+					  slideLayout : 'fill',     /* "contain" (fit according to aspect ratio), "fill" (stretches object to fill) and "cover" (overflows box but maintains ratio) */
+					  animation: 'slide', 		/* slide | scroll | fade | zoomInSlide | zoomInScroll */
+					  animationCurve: 'ease',
+					  animationDuration: 700,
+					  animationInterval: 1000,
+					  onSlideShow: shown,		/* callback when Slide show event occurs */
+					  navigation: 'circles',	/* circles | squares */
+					  slides: slides 			/* array of images source or gets slides by 'slide' class */
+						  
+				}
+	function setUp(){
+     	$('.jRCarouselGallery').jR3DCarousel(carouselProps);
+	    $('.settings').html('<pre>$(".jRCarouselGallery").jR3DCarousel('+JSON.stringify(carouselProps, null, 4)+')</pre>')
+	}
+	function shown(slide){
+		$('.imgSlide').text(slide.find('img').attr('src'))
+	}
+	$('.carousel-props input').change(function(){
+	    carouselProps[this.name] = this.value || null; 
+    	for (var i = 0; i < 999; i++){clearInterval(i);}
+	    var slides = $('.jRCarouselGallery').find('.slide'); $('.jRCarouselGallery').empty();/* $('.jRCarouselGallery').append(slides); */ setUp();
+	});
+
+	$('[name=slides]').change(function(){
+	    carouselProps[this.name] = getSlides(this.value); 
+		for (var i = 0; i < 999; i++){clearInterval(i);}
+	    $('.jRCarouselGallery').empty(); setUp();
+	});
+	
+	function getSlides(no){
+		slides = [];
+		for ( var i = 0; i < no; i++) {
+			slides.push({src: 'http://lorempixel.com//'+Math.floor(1366-Math.random()*200)+'/'+Math.floor(768+Math.random()*200)})
+		}
+		return slides;
+	}
+	
+	carouselProps.slides = getSlides(7);
+	setUp()
+    });
+  </script>
+  <style>
+    .wrapper{
+    	padding-right: 10px;
+    	padding-left: 10px;
+    	margin-right: auto;
+    	margin-left: auto;
+    	width: 48%;
+    	height: 295px;
+    	float: left;
+    	overflow: auto;
+    	border-left: 1px solid #999;
+    }
+    .wrapper div{
+	    margin: 8px auto;
+	    padding: 20px auto;
+    }
+  </style>
   </head>
   <body>
     <section class="page-header">
       <h1 class="project-name">jR3DCarousel</h1>
+      <div class="jRCarouselGallery"></div>
+      <div class="wrapper">
+	<h2>Options for jR3DCarousel</h2>
+	<div class="carousel-props" >
+	 <input type="radio" name="animation" value="slide" checked="checked" />slide
+	 <input type="radio" name="animation" value="slide3D" />slide3D
+	 <input type="radio" name="animation" value="scroll"  />scroll
+	 <input type="radio" name="animation" value="scroll3D"  />scroll3D
+	 <input type="radio" name="animation" value="fade"  />fade
+	 </div>
+	<div class="carousel-props" >
+	 <input type="radio" name="slideLayout" value="fill" checked="checked" />fill
+	 <input type="radio" name="slideLayout" value="contain"  />contain
+	 <input type="radio" name="slideLayout" value="cover"  />cover
+	</div>
+	<div class="carousel-props" >
+	 <input type="radio" name="animationCurve" value="ease" checked="checked" />ease
+	 <input type="radio" name="animationCurve" value="ease-in"  />ease-in
+	 <input type="radio" name="animationCurve" value="ease-out"  />ease-out
+	 <input type="radio" name="animationCurve" value="ease-in-out"  />ease-in-out
+	 <input type="radio" name="animationCurve" value="linear"  />linear
+	 <input type="radio" name="animationCurve" value="cubic-bezier(0.4, 0.6, 0.11, 0.19)"  />cubic-bezier(0.4, 0.6, 0.11, 0.19) curve
+	</div>
+	<div class="carousel-props" >
+	 <input type="radio" name="navigation" value="circle" checked="checked" />circle
+	 <input type="radio" name="navigation" value="square"  />square
+	 <input type="radio" name="navigation" value="" />None
+	</div>
+	<div class="carousel-props" >
+	 <input type="radio" name="autoplay" value="true" checked="checked" />autoplay
+	 <input type="radio" name="autoplay" value=""  />manual
+	</div>
+	<div>
+	 	<input type="range" min="1" max="20" value="4" name="slides" /> Slides
+	</div>
+	<div class="carousel-props" >
+		<input type="range" min="100" max="1366" name="width" />Width
+		<input type="range" min="100" max="720" name="height" />Height
+	</div>
+	<div class="carousel-props" >
+	 	<input type="range" min="10" max="2000" name="animationDuration" />animationDuration
+		<input type="range" min="10" max="2000" name="animationInterval" />animationInterval
+	</div>
+	</div>
+	<div class="wrapper">
+		<h2>Code to getting started</h2>
+		<!-- <iframe width="100%" height="40" src="https://jsfiddle.net/vinayakjadhav/3KBFR/embedded/result" allowfullscreen="allowfullscreen" frameborder="0"></iframe> -->
+		<div class="settings"></div>
+	</div>
       <h2 class="project-tagline">jQuery Responsive 3D Carousel</h2>
       <a href="https://github.com/vinayakjadhav/jR3DCarousel" class="btn">View on GitHub</a>
       <a href="https://github.com/vinayakjadhav/jR3DCarousel/zipball/master" class="btn">Download .zip</a>
