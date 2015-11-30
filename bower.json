@@ -1,0 +1,24 @@
+{
+  "name": "jr3dcarousel",
+  "homepage": "https://github.com/vinayakjadhav/jR3DCarousel",
+  "authors": [
+    "Vinayak Rangnathrao Jadhav <vinayakrpjadhav@gmail.com>"
+  ],
+  "description": "jQuery Responsive 3D Carousel with modern effects",
+  "main": "dist/jR3DCarousel.min.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "images/",
+	"index.html"
+  ]
+}
