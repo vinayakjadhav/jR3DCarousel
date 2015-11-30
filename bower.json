@@ -16,11 +16,11 @@
     "node"
   ],
   "keywords": [
-    "jR3DCarousel",
-    "Carousel",
-    "3D Carousel",
-    "Responsive Carousel",
-    "Gallery"
+	"jR3DCarousel",
+	"Carousel",
+	"3D Carousel",
+	"Responsive Carousel",
+	"Gallery"
   ],
   "license": "MIT",
   "dependencies": {
@@ -32,9 +32,9 @@
     "bower_components",
     "test",
     "tests",
-     "*.md",
+    "*.md",
     ".*",
     "images/",
-	"index.html"
+    "index.html"
   ]
 }
