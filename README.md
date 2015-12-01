@@ -21,12 +21,12 @@ jR3DCarousel is a derived from the origin project - [jRCarousel](https://github.
    ![animationnew](https://cloud.githubusercontent.com/assets/7734229/11457324/f46c4d30-96cb-11e5-9281-b0141721b755.gif)
 
 ## Installation
-### Using npm
+#### Using npm
 ``` 
 npm install jr3dcarousel
 ```
 
-### Using bower
+#### Using bower
 ```
 bower install jR3DCcarousel
 ```
@@ -35,7 +35,7 @@ Or
 bower install jr3dcarousel
 ```
 
-### old school way
+#### old school way
 
 	<!-- add jQuery if not already present in your project -->
 ``` javascript
