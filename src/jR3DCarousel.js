@@ -1,8 +1,8 @@
 /**
  * Author: Vinayak Rangnathrao Jadhav
  * Project: jR3DCarousel
- * Version: 1.0.1
- */
+ * Version: 0.0.2
+ **/
 (function (factory) {
     if (typeof define === "function" && define.amd) {
         define(["jquery"], factory);
@@ -34,7 +34,7 @@
 		var _height = _settings.height;
 		var _aspectRatio = _settings.width/_settings.height;
 		var _jR3DCarouselDiv = $( "<div class='jR3DCarousel' />" )
-								.css({ position: 'absolute', width: '100%', height: '100%', transition:'transform '+_settings.animationDuration+'ms '+_settings.animationCurve, 'transformStyle': 'preserve-3d' })
+								.css({ width: '100%', height: '100%', transition:'transform '+_settings.animationDuration+'ms '+_settings.animationCurve, 'transformStyle': 'preserve-3d' })
 								.appendTo(_container);
 		var _currentSlideIndex = 0;
 		var _targetSlideIndex = 1;
@@ -70,22 +70,21 @@
 			}
 			
 			/* adjust size according to device */
-			addEventListener('resize', _drawResposive);
-			_drawResposive();
+			addEventListener('resize', _maintainResposive);
+			_maintainResposive();
 			
 			function createjR3DCarousel(){
 				/* compute translate and perspective */
 				if(_settings.animation.indexOf('slide')!=-1){
-					_translateZ = (_width/2) / Math.tan(Math.PI/_noOfSlides) + 5;
+					_translateZ = (_width/2) / Math.tan(Math.PI/_noOfSlides);
 					_perspective = (_width/2) * Math.tan(2*Math.PI/_noOfSlides)+'px';
 				}else if(_settings.animation.indexOf('scroll')!=-1){
-					_translateZ = (_height/2) / Math.tan(Math.PI/_noOfSlides) + 5;
+					_translateZ = (_height/2) / Math.tan(Math.PI/_noOfSlides);
 					_perspective = (_height/2) * Math.tan(2*Math.PI/_noOfSlides)+'px';
 				}else if(_settings.animation == 'fade'){
-					_translateZ = (_width/2) / Math.tan(Math.PI/_noOfSlides) + 5;
+					_translateZ = (_width/2) / Math.tan(Math.PI/_noOfSlides);
 					_perspective = (_width/2) * Math.tan(2*Math.PI/_noOfSlides)+'px';
 				}
-				//_jR3DCarouselDiv.css({ transform: 'translateZ('+-_translateZ+'px)' });
 				
 				_baseAngle = 360 / _noOfSlides;
 
@@ -118,7 +117,7 @@
 						_jR3DCarouselDiv.append(slide);
 					});
 				}
-				_jR3DCarouselDiv.find('.slide').css({position: 'absolute', left: 0, top:0, width:'100%', height:'100%',	backgroundColor:'#fff', backfaceVisibility: 'hidden'});
+				_jR3DCarouselDiv.find('.slide').css({position: 'absolute', left: 0, top:0, width:'100%', height:'100%', backfaceVisibility: 'hidden'});
 				_jR3DCarouselDiv.find('.slide img').css({ width:'100%', height:'100%', objectFit:_settings.slideLayout });
 				
 				_container.css({ perspective: _perspective, width: _width+'px', height: _height+'px', position: "relative", overflow: 'visible'});
@@ -214,9 +213,7 @@
 					slide3D : _slide3D,
 					scroll: _scroll,
 					scroll3D: _scroll3D,
-					fade: _fade/*,
-					zoomInSlide: _zoomInSlide,
-					zoomInScroll: _zoomInScroll*/
+					fade: _fade
 				}
 		}
 		Animations.prototype.run = function run(animation, targetSlideIndex){
@@ -238,6 +235,7 @@
 		}
 		
 		function _slide3D(targetSlideIndex){
+			_container.css({ perspective: _perspective, overflow: 'visible' });
 			_rotationAngle = _baseAngle * targetSlideIndex;
 			_jR3DCarouselDiv.css({ transform: 'translateZ('+-_translateZ+'px) rotateY('+-_rotationAngle+'deg)' });
 			_slideCarouseld();
@@ -251,6 +249,7 @@
 		}
 		
 		function _scroll3D(targetSlideIndex){
+			_container.css({ perspective: _perspective, overflow: 'visible' });
 			_rotationAngle=_baseAngle * targetSlideIndex;
 			_jR3DCarouselDiv.css({ transform: 'translateZ('+-_translateZ+'px) rotateX('+-_rotationAngle+'deg)' });
 			_slideCarouseld();
@@ -267,75 +266,7 @@
 			_slideCarouseld();
 		}
 		
-		/*function _zoomInScroll(direction){
-			if(direction==1){
-				_currentSlide.css({	height: 0 })
-				.animate({
-					height: '100%'
-				},
-				{
-				duration: _settings.animationDuration,
-				complete: function(){
-					_stopCarousel();
-				}
-			})
-			}else{
-				_currentSlide
-				.animate({
-					height: 0
-				},
-				{
-					duration: _settings.animationDuration,
-					complete: function(){
-						_currentSlide.css({ height:'100%' });
-						 make target slide to appear on top of stack after animation 
-						while(_getCurrentSlide().data('index') != _targetSlideIndex){
-							_currentSlide = _getCurrentSlide().detach().prependTo(_wrapper);
-						}
-						_currentSlide = _getCurrentSlide();
-						_stopCarousel();
-					}
-				})
-			}
-		}
-		
-		function _zoomInSlide(direction){
-			if(direction==1){
-				_currentSlide.css({
-					width: 0,
-					left: _width+'px'
-				})
-				.animate({
-					width: '100%',
-					left:0
-				},
-				{
-				duration: _settings.animationDuration,
-				complete: function(){
-					_stopCarousel();
-				}
-			})
-			}else{
-				_currentSlide
-				.animate({
-					width: 0
-				},
-				{
-					duration: _settings.animationDuration,
-					complete: function(){
-						_currentSlide.css({ width:'100%' });
-						 make target slide to appear on top of stack after animation 
-						while(_getCurrentSlide().data('index') != _targetSlideIndex){
-							_currentSlide = _getCurrentSlide().detach().prependTo(_wrapper);
-						}
-						_currentSlide = _getCurrentSlide();
-						_stopCarousel();
-					}
-				})
-			}		
-		}*/
-		
-		function _drawResposive(){
+		function _maintainResposive(){
 			_container.width('100%');
 			_width = _container.width() < _settings.width ? _container.width() : _settings.width;
 			_height = _width/_aspectRatio;
