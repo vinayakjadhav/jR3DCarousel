@@ -1,7 +1,7 @@
 /**
  * Author: Vinayak Rangnathrao Jadhav
  * Project: jR3DCarousel
- * Version: 0.0.2
+ * Version: 0.0.3
  **/
 (function (factory) {
     if (typeof define === "function" && define.amd) {
@@ -149,6 +149,32 @@
 				},function(){
 					_previousButton.add(_nextButton).fadeOut();
 				});
+				
+				var mousePressed = false;
+				var oldPageX = 0;
+				var moveDirection;
+				_container.on('mousedown', function(e){
+					e.preventDefault();
+					mousePressed = true;
+					oldPageX = e.pageX;
+					moveDirection = "";
+				})
+				.on('mousemove', function(e){
+					e.preventDefault();
+					if(mousePressed && Math.abs(oldPageX - e.pageX) > 20){
+							moveDirection = (oldPageX > e.pageX) ? "left" : "right";
+					}
+				})
+				.on('mouseup', function(){
+					mousePressed = false;
+					if(moveDirection == "left"){
+						_nextButton.click();
+					}
+					else if(moveDirection == "right"){
+						_previousButton.click();
+					}
+				});
+				
 			}
 			
 			function _createNavigation(){
@@ -224,8 +250,8 @@
 			/* set active nav icon */
 			_container.find('.nav').css({  backgroundColor: 'rgba(77, 77, 77, 0.4)' })
 								   .eq(_targetSlideIndex % _noOfSlides).css({ backgroundColor: 'rgba(07, 07, 07, 1)' });
-			_currentSlideIndex = Math.round(_rotationAngle /_baseAngle);
-			_settings.onSlideShow.call(this, _getCurrentSlide());
+			_currentSlideIndex = (Math.round(_rotationAngle /_baseAngle) - 1) % _noOfSlides;
+			_settings.onSlideShow.call(this, _getNextSlide());
 		}
 		function _slide(targetSlideIndex){
 			_container.css({ perspective: '', overflow: 'hidden' });
@@ -275,7 +301,7 @@
 		
 		/* public API */
 		this.showSlide = function(index){
-			_jR3DCarouselDiv.find('.nav').eq(index).click();
+			_jR3DCarouselDiv.find('.nav').eq((index-1)%_noOfSlides).click();
 		}
 		this.getCurrentSlide = function(){
 			return _getCurrentSlide();
