@@ -14,15 +14,15 @@
         $(document).ready(function(){
             var slides = [];
         	var carouselProps =  {
-			 		  width: 400, 				/* largest allowed width */
-					  height: 222, 				/* largest allowed height */
+			 		  width: 700, 				/* largest allowed width */
+					  height: 322, 				/* largest allowed height */
 					  slideLayout : 'fill',     /* "contain" (fit according to aspect ratio), "fill" (stretches object to fill) and "cover" (overflows box but maintains ratio) */
 					  animation: 'slide3D', 		/* slide | scroll | fade | zoomInSlide | zoomInScroll */
 					  animationCurve: 'ease',
 					  animationDuration: 700,
 					  animationInterval: 1000,
 					  //autoplay: false,
-					  onSlideShow: show,		/* callback when Slide show event occurs */
+					  onSlideShow: shown,		/* callback when Slide show event occurs */
 					  navigation: 'circles',	/* circles | squares */
 					  slides: slides 			/* array of images source or gets slides by 'slide' class */
 						  
@@ -31,7 +31,7 @@
  		$('.jRCarouselGallery').jR3DCarousel(carouselProps);
 		$('.settings').html('<pre>$(".jRCarouselGallery").jR3DCarousel('+JSON.stringify(carouselProps, null, 4)+')</pre>')
 	}
-	function show(slide){
+	function shown(slide){
 		console.log("Slide shown: ", slide.find('img').attr('src'))
 	}
 	$('.carousel-props input').change(function(){
