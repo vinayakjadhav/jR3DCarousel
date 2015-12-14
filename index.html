@@ -14,41 +14,45 @@
         $(document).ready(function(){
             var slides = [];
         	var carouselProps =  {
-			 		  width: 700, 				/* largest allowed width */
-					  height: 320, 				/* largest allowed height */
+			 		  width: 400, 				/* largest allowed width */
+					  height: 222, 				/* largest allowed height */
 					  slideLayout : 'fill',     /* "contain" (fit according to aspect ratio), "fill" (stretches object to fill) and "cover" (overflows box but maintains ratio) */
 					  animation: 'slide3D', 		/* slide | scroll | fade | zoomInSlide | zoomInScroll */
 					  animationCurve: 'ease',
 					  animationDuration: 700,
 					  animationInterval: 1000,
-					  onSlideShow: shown,		/* callback when Slide show event occurs */
+					  //autoplay: false,
+					  onSlideShow: show,		/* callback when Slide show event occurs */
 					  navigation: 'circles',	/* circles | squares */
 					  slides: slides 			/* array of images source or gets slides by 'slide' class */
 						  
 				}
 	function setUp(){
-     	$('.jRCarouselGallery').jR3DCarousel(carouselProps);
-	    $('.settings').html('<pre>$(".jRCarouselGallery").jR3DCarousel('+JSON.stringify(carouselProps, null, 4)+')</pre>')
+ 		$('.jRCarouselGallery').jR3DCarousel(carouselProps);
+		$('.settings').html('<pre>$(".jRCarouselGallery").jR3DCarousel('+JSON.stringify(carouselProps, null, 4)+')</pre>')
 	}
-	function shown(slide){
-		$('.imgSlide').text(slide.find('img').attr('src'))
+	function show(slide){
+		console.log("Slide shown: ", slide.find('img').attr('src'))
 	}
 	$('.carousel-props input').change(function(){
-	    carouselProps[this.name] = this.value || null; 
-    	for (var i = 0; i < 999; i++){clearInterval(i);}
-	    var slides = $('.jRCarouselGallery').find('.slide'); $('.jRCarouselGallery').empty();/* $('.jRCarouselGallery').append(slides); */ setUp();
-	});
-
+		carouselProps[this.name] = this.value || null; 
+		for(var i = 0; i < 999; i++)
+	     clearInterval(i);
+		var slides = $('.jRCarouselGallery').find('.slide'); $('.jRCarouselGallery').empty();/* $('.jRCarouselGallery').append(slides); */ 
+		setUp();
+	})
+	
 	$('[name=slides]').change(function(){
-	    carouselProps[this.name] = getSlides(this.value); 
-		for (var i = 0; i < 999; i++){clearInterval(i);}
-	    $('.jRCarouselGallery').empty(); setUp();
+		carouselProps[this.name] = getSlides(this.value); 
+		for (var i = 0; i < 999; i++)
+	     clearInterval(i);
+		$('.jRCarouselGallery').empty(); setUp();
 	});
 	
 	function getSlides(no){
 		slides = [];
 		for ( var i = 0; i < no; i++) {
-			slides.push({src: 'http://lorempixel.com//'+Math.floor(1366-Math.random()*100)+'/'+Math.floor(768+Math.random()*100)})
+			slides.push({src: 'https://unsplash.it/'+Math.floor(1366-Math.random()*200)+'/'+Math.floor(768+Math.random()*200)})
 		}
 		return slides;
 	}
