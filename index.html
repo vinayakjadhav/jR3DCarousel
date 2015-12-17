@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <title>jR3DCarousel by vinayakjadhav</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
     <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js'></script>
     <script type="text/javascript" src="https://cdn.rawgit.com/vinayakjadhav/jR3DCarousel/master/dist/jR3DCarousel.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
@@ -117,11 +119,14 @@
         <div class="wrapper">
 	<strong>Options for jR3DCarousel</strong>
 	<div class="carousel-props" >
-	 <input type="radio" name="animation" value="slide" />slide
-	 <input type="radio" name="animation" value="slide3D" checked="checked" />slide3D
-	 <input type="radio" name="animation" value="scroll"  />scroll
-	 <input type="radio" name="animation" value="scroll3D"  />scroll3D
-	 <input type="radio" name="animation" value="fade"  />fade
+	<div class="btn-group" data-toggle="buttons">
+  	 <label class="btn btn-primary active">
+	 	<input type="radio" name="animation" value="slide" />slide
+	 </label>
+	 <label class="btn btn-primary"><input type="radio" name="animation" value="slide3D" checked="checked" />slide3D</label>
+	 <label class="btn btn-primary"><input type="radio" name="animation" value="scroll"  />scroll</label>
+	 <label class="btn btn-primary"><input type="radio" name="animation" value="scroll3D"  />scroll3D</label>
+	 <label class="btn btn-primary"><input type="radio" name="animation" value="fade"  />fade</label>
 	 </div>
 	<div class="carousel-props" >
 	 <input type="radio" name="slideLayout" value="fill" checked="checked" />fill
