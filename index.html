@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <title>jR3DCarousel by vinayakjadhav</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <!--<link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">-->
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" />
     <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
     <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js'></script>
     <script type="text/javascript" src="https://cdn.rawgit.com/vinayakjadhav/jR3DCarousel/master/dist/jR3DCarousel.min.js"></script>
@@ -110,6 +110,7 @@
     }
     input[type=range]{
     	display: inline;
+    	width: initial;
     }
   </style>
   </head>
@@ -122,44 +123,44 @@
         <div class="wrapper">
 	<h4>Options for jR3DCarousel</h4>
 	<div class="carousel-props btn-group" data-toggle="buttons">
-	 <label class="btn btn-default active btn-xs"><input type="radio" name="animation" value="slide" />slide</label>
-	 <label class="btn btn-default btn-xs"><input type="radio" name="animation" value="slide3D" checked="checked" />slide3D</label>
-	 <label class="btn btn-default btn-xs"><input type="radio" name="animation" value="scroll"  />scroll</label>
-	 <label class="btn btn-default btn-xs"><input type="radio" name="animation" value="scroll3D"  />scroll3D</label>
-	 <label class="btn btn-default btn-xs"><input type="radio" name="animation" value="fade"  />fade</label>
+	 <label class="btn btn-danger active btn-xs"><input type="radio" name="animation" value="slide" />slide</label>
+	 <label class="btn btn-danger btn-xs"><input type="radio" name="animation" value="slide3D" checked="checked" />slide3D</label>
+	 <label class="btn btn-danger btn-xs"><input type="radio" name="animation" value="scroll"  />scroll</label>
+	 <label class="btn btn-danger btn-xs"><input type="radio" name="animation" value="scroll3D"  />scroll3D</label>
+	 <label class="btn btn-danger btn-xs"><input type="radio" name="animation" value="fade"  />fade</label>
 	</div>
 	<div class="carousel-props btn-group" data-toggle="buttons">
-	 <label class="btn btn-default btn-xs active"><input type="radio" name="slideLayout" value="fill" checked="checked" />fill</label>
-	 <label class="btn btn-default btn-xs"><input type="radio" name="slideLayout" value="contain"  />contain</label>
-	 <label class="btn btn-default btn-xs"><input type="radio" name="slideLayout" value="cover"  />cover</label>
+	 <label class="btn btn-danger btn-xs active"><input type="radio" name="slideLayout" value="fill" checked="checked" />fill</label>
+	 <label class="btn btn-danger btn-xs"><input type="radio" name="slideLayout" value="contain"  />contain</label>
+	 <label class="btn btn-danger btn-xs"><input type="radio" name="slideLayout" value="cover"  />cover</label>
 	</div>
 	<div class="carousel-props btn-group" data-toggle="buttons">
-	 <label class="btn btn-default btn-xs active"><input type="radio" name="animationCurve" value="ease" checked="checked" />ease</label>
-	 <label class="btn btn-default btn-xs"><input type="radio" name="animationCurve" value="ease-in"  />ease-in</label>
-	 <label class="btn btn-default btn-xs"><input type="radio" name="animationCurve" value="ease-out"  />ease-out</label>
-	 <label class="btn btn-default btn-xs"><input type="radio" name="animationCurve" value="ease-in-out"  />ease-in-out</label>
-	 <label class="btn btn-default btn-xs"><input type="radio" name="animationCurve" value="linear"  />linear</label>
-	 <label class="btn btn-default btn-xs"><input type="radio" name="animationCurve" value="cubic-bezier(0.4, 0.6, 0.11, 0.19)"  />cubic-bezier(0.4, 0.6, 0.11, 0.19) curve</label>
+	 <label class="btn btn-danger btn-xs active"><input type="radio" name="animationCurve" value="ease" checked="checked" />ease</label>
+	 <label class="btn btn-danger btn-xs"><input type="radio" name="animationCurve" value="ease-in"  />ease-in</label>
+	 <label class="btn btn-danger btn-xs"><input type="radio" name="animationCurve" value="ease-out"  />ease-out</label>
+	 <label class="btn btn-danger btn-xs"><input type="radio" name="animationCurve" value="ease-in-out"  />ease-in-out</label>
+	 <label class="btn btn-danger btn-xs"><input type="radio" name="animationCurve" value="linear"  />linear</label>
+	 <label class="btn btn-danger btn-xs"><input type="radio" name="animationCurve" value="cubic-bezier(0.4, 0.6, 0.11, 0.19)"  />cubic-bezier(0.4, 0.6, 0.11, 0.19) curve</label>
 	</div>
 	<div class="carousel-props btn-group" data-toggle="buttons">
-	 <label class="btn btn-default btn-xs active"><input type="radio" name="navigation" value="circle" checked="checked" />circle</label>
-	 <label class="btn btn-default btn-xs"><input type="radio" name="navigation" value="square"  />square</label>
-	 <label class="btn btn-default btn-xs"><input type="radio" name="navigation" value="" />None</label>
+	 <label class="btn btn-danger btn-xs active"><input type="radio" name="navigation" value="circle" checked="checked" />circle</label>
+	 <label class="btn btn-danger btn-xs"><input type="radio" name="navigation" value="square"  />square</label>
+	 <label class="btn btn-danger btn-xs"><input type="radio" name="navigation" value="" />None</label>
 	</div>
 	<div class="carousel-props btn-group" data-toggle="buttons">
-	 <label class="btn btn-default btn-xs active"><input type="radio" name="autoplay" value="true" checked="checked" />autoplay</label>
-	 <label class="btn btn-default btn-xs"><input type="radio" name="autoplay" value=""  />manual</label>
+	 <label class="btn btn-danger btn-xs active"><input type="radio" name="autoplay" value="true" checked="checked" />autoplay</label>
+	 <label class="btn btn-danger btn-xs"><input type="radio" name="autoplay" value=""  />manual</label>
 	</div>
 	<div>
-	 	<input type="range" min="1" max="20" value="4" name="slides" /> Slides
+	 Slides  <input type="range" min="1" max="20" value="4" name="slides" />
 	</div>
 	<div class="carousel-props" >
-		<input type="range" min="100" max="1366" name="width" />Width
-		<input type="range" min="100" max="720" name="height" />Height
+	 Width  <input type="range" min="100" max="1366" name="width" />
+	 Height  <input type="range" min="100" max="720" name="height" />
 	</div>
 	<div class="carousel-props" >
-	 	<input type="range" min="10" max="2000" name="animationDuration" />animationDuration
-		<input type="range" min="10" max="2000" name="animationInterval" />animationInterval
+	 animationDuration  <input type="range" min="10" max="2000" name="animationDuration" />
+	 animationInterval <input type="range" min="10" max="2000" name="animationInterval" />
 	</div>
 	</div>
 	<div class="wrapper">
