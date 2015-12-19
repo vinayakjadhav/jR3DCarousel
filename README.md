@@ -115,9 +115,9 @@ $('.jR3DCarouselGallery').jR3DCarousel({
 - ###### Usage
 ```
 var myjR3DCarousel = $('.jR3DCarouselGallery')
-			.jR3DCarousel({
-				slides: slides
-		     });
+						.jR3DCarousel({
+							slides: slides
+						});
 
 myjR3DCarousel.showSlide(0);
 myjR3DCarousel.showPreviousSlide();
