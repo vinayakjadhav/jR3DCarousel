@@ -15,8 +15,8 @@ jR3DCarousel is a derived from the origin project - [jRCarousel](https://github.
 - Minimal configuration, easy to install
 - Useful public API for extending the functionalities like custom nav buttons.
  
-## jR3DCarousel Demo
-   [Click here](http://vinayakjadhav.github.io/jR3DCarousel/) for Live demo.
+## Live Demo
+   [Click here](http://vinayakjadhav.github.io/jR3DCarousel/) for Live Demo.
 
    ![animationnew](https://cloud.githubusercontent.com/assets/7734229/11457324/f46c4d30-96cb-11e5-9281-b0141721b755.gif)
 
@@ -120,7 +120,7 @@ var myjR3DCarousel = $('.jR3DCarouselGallery').jR3DCarousel({
 
 myjR3DCarousel.showSlide(0);
 myjR3DCarousel.showPreviousSlide();
-myjR3DCarousel.howNextSlide();
+myjR3DCarousel.showNextSlide();
 var slide = myjR3DCarousel.getSlideByIndex(1);
 var currentSlide = myjR3DCarousel.getCurrentSlide();
 ```
