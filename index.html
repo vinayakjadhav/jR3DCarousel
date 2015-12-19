@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>jRCarousel - a Responsive Carousel</title>
+<title>jR3DCarousel - a jQuery 3D Responsive Carousel</title>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="src/jR3DCarousel.js"></script>
 <script type="text/javascript">
@@ -24,9 +24,9 @@ $(document).ready(function(){
 						  
 				}
 	function setUp(){
- 		$('.jRCarouselGallery').jR3DCarousel(carouselProps);
+ 		$('.jR3DCarouselGallery').jR3DCarousel(carouselProps);
 
-		$('.settings').html('<pre>$(".jRCarouselGallery").jR3DCarousel('+JSON.stringify(carouselProps, null, 4)+')</pre>')
+		$('.settings').html('<pre>$(".jR3DCarouselGallery").jR3DCarousel('+JSON.stringify(carouselProps, null, 4)+')</pre>')
 	}
 	function show(slide){
 		console.log("Slide shown: ", slide.find('img').attr('src'))
@@ -35,7 +35,7 @@ $(document).ready(function(){
 		carouselProps[this.name] = this.value || null; 
 		for(var i = 0; i < 999; i++)
 	     clearInterval(i);
-		var slides = $('.jRCarouselGallery').find('.slide'); $('.jRCarouselGallery').empty();/* $('.jRCarouselGallery').append(slides); */ 
+		var slides = $('.jR3DCarouselGallery').find('.slide'); $('.jR3DCarouselGallery').empty();/* $('.jR3DCarouselGallery').append(slides); */ 
 		setUp();
 	})
 	
@@ -43,7 +43,7 @@ $(document).ready(function(){
 		carouselProps[this.name] = getSlides(this.value); 
 		for (var i = 0; i < 999; i++)
 	     clearInterval(i);
-		$('.jRCarouselGallery').empty(); setUp();
+		$('.jR3DCarouselGallery').empty(); setUp();
 	});
 	
 	function getSlides(no){
@@ -64,7 +64,6 @@ $(document).ready(function(){
 body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 14px;
-	overflow: hidden;
 }
 
 .container {
@@ -72,9 +71,10 @@ body {
 	padding-left: 15px;
 	margin-right: auto;
 	margin-left: auto;
+	overflow: hidden;
 }
 
-.jRCarouselGallery,.jRCarouselGallery1 {
+.jR3DCarouselGallery,.jR3DCarouselGallery1 {
 	margin: 0 auto; /* optional - if want to center align */
 }
 
@@ -100,17 +100,17 @@ body {
 
 <body>
 	<div class="container">
-		<h1>jRCarousel - jQuery Responsive Carousel</h1>
+		<h1>jR3DCarousel - jQuery 3D Responsive Carousel</h1>
 		<br/>
 		<div>
-			<div class="jRCarouselGallery"></div>
+			<div class="jR3DCarouselGallery"></div>
 		</div>
 		<br/>
 		<hr/>
 		<!--
 		<div>
-			<h2>jRCarousel Gallery - with slides in template </h2>
-			<div class="jRCarouselGallery1">
+			<h2>jR3DCarousel Gallery - with slides in template </h2>
+			<div class="jR3DCarouselGallery1">
 				<div class="slide"><img style="width: 70%" src="http://lorempixel.com//800/351" /><div style="width: 30%">This is custom Text</div></div>
 				<div class="slide"><img style="width: 70%" src="http://lorempixel.com//800/352" /><div style="width: 30%">This is custom Text</div></div>
 				<div class="slide"><img style="width: 70%" src="http://lorempixel.com//800/353" /><div style="width: 30%">This is custom Text</div></div>
@@ -166,8 +166,8 @@ body {
 	</div>
 	<div class="wrapper">
 		<h2>Code to getting started</h2>
-		<!-- <iframe width="100%" height="40" src="https://jsfiddle.net/vinayakjadhav/3KBFR/embedded/result" allowfullscreen="allowfullscreen" frameborder="0"></iframe> -->
 		<div class="settings"></div>
+		<!-- <iframe width="100%" height="40" src="https://jsfiddle.net/vinayakjadhav/3KBFR/embedded/result" allowfullscreen="allowfullscreen" frameborder="0"></iframe> -->		
 	</div>
 </body>
 </html>
