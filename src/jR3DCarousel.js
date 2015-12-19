@@ -1,7 +1,7 @@
 /**
  * Author: Vinayak Rangnathrao Jadhav
  * Project: jR3DCarousel
- * Version: 0.0.3
+ * Version: 0.0.4
  **/
 (function (factory) {
     if (typeof define === "function" && define.amd) {
@@ -152,17 +152,24 @@
 				
 				var mousePressed = false;
 				var oldPageX = 0;
+				var oldPageY = 0;
 				var moveDirection;
 				_container.on('mousedown', function(e){
 					e.preventDefault();
 					mousePressed = true;
 					oldPageX = e.pageX;
+					oldPageY = e.pageY;
 					moveDirection = "";
 				})
 				.on('mousemove', function(e){
 					e.preventDefault();
-					if(mousePressed && Math.abs(oldPageX - e.pageX) > 20){
+					if(!mousePressed){
+						return;
+					}
+					if(Math.abs(oldPageX - e.pageX) > 20){
 							moveDirection = (oldPageX > e.pageX) ? "left" : "right";
+					}else if(Math.abs(oldPageY - e.pageY) > 20){
+							moveDirection = (oldPageY < e.pageY) ? "left" : "right";
 					}
 				})
 				.on('mouseup', function(){
@@ -173,6 +180,20 @@
 					else if(moveDirection == "right"){
 						_previousButton.click();
 					}
+				});
+				
+				$(document).on('keydown', function(e){
+					var rect = _container[0].getBoundingClientRect();
+				    var inView = rect.bottom > 0 &&  rect.right > 0 &&
+				        rect.left < (innerWidth || document.documentElement.clientWidth) &&
+				        rect.top < (innerHeight || document.documentElement.clientHeight);
+					
+					if(inView && e.which == 37){
+						_previousButton.click();
+					}else if(inView && e.which == 39){
+						_nextButton.click();
+					}
+
 				});
 				
 			}
@@ -297,6 +318,30 @@
 			_width = _container.width() < _settings.width ? _container.width() : _settings.width;
 			_height = _width/_aspectRatio;
 			_container.css({width: _width+'px', height: _height+'px' });
+			
+			if(_settings.animation.indexOf('slide')!=-1){
+				_translateZ = (_width/2) / Math.tan(Math.PI/_noOfSlides);
+				_perspective = (_width/2) * Math.tan(2*Math.PI/_noOfSlides)+'px';
+			}else if(_settings.animation.indexOf('scroll')!=-1){
+				_translateZ = (_height/2) / Math.tan(Math.PI/_noOfSlides);
+				_perspective = (_height/2) * Math.tan(2*Math.PI/_noOfSlides)+'px';
+			}else if(_settings.animation == 'fade'){
+				_translateZ = (_width/2) / Math.tan(Math.PI/_noOfSlides);
+				_perspective = (_width/2) * Math.tan(2*Math.PI/_noOfSlides)+'px';
+			}
+			
+			_container.find('.slide').each(function(i){
+				var slide = $(this);
+				if(_settings.animation.indexOf('slide')!=-1){
+					_transform = 'rotateY('+_baseAngle*i+'deg) translateZ('+_translateZ+'px)';
+				}else if(_settings.animation.indexOf('scroll')!=-1){
+					_transform = 'rotateX('+_baseAngle*i+'deg) translateZ('+_translateZ+'px)';
+				}else if(_settings.animation == 'fade'){
+					_transform = 'rotateY('+_baseAngle*i+'deg) translateZ('+_translateZ+'px)';
+				}
+				slide.css({ transform: _transform });
+			});
+			
 		}	
 		
 		/* public API */
