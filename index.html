@@ -13,34 +13,36 @@
     <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js'></script>
     <script type="text/javascript" src="https://cdn.rawgit.com/vinayakjadhav/jR3DCarousel/master/dist/jR3DCarousel.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
-            var slides = [];
-        	var carouselProps =  {
-			 		  width: 700, 				/* largest allowed width */
-					  height: 342, 				/* largest allowed height */
+$(document).ready(function(){
+	var slides = [{src: '../jRCarousel/images/101.jpg'}, {src: '../jRCarousel/images/04.jpg'}, {src: '../jRCarousel/images/020.jpg'}, {src: '../jRCarousel/images/03.jpg'}]
+
+	var carouselProps =  {
+			 		  width: 400, 				/* largest allowed width */
+					  height: 222, 				/* largest allowed height */
 					  slideLayout : 'fill',     /* "contain" (fit according to aspect ratio), "fill" (stretches object to fill) and "cover" (overflows box but maintains ratio) */
 					  animation: 'slide3D', 		/* slide | scroll | fade | zoomInSlide | zoomInScroll */
 					  animationCurve: 'ease',
 					  animationDuration: 700,
 					  animationInterval: 1000,
 					  //autoplay: false,
-					  onSlideShow: shown,		/* callback when Slide show event occurs */
+					  onSlideShow: show,		/* callback when Slide show event occurs */
 					  navigation: 'circles',	/* circles | squares */
 					  slides: slides 			/* array of images source or gets slides by 'slide' class */
 						  
 				}
 	function setUp(){
- 		$('.jRCarouselGallery').jR3DCarousel(carouselProps);
-		$('.settings').html('<pre>$(".jRCarouselGallery").jR3DCarousel('+JSON.stringify(carouselProps, null, 4)+')</pre>')
+ 		$('.jR3DCarouselGallery').jR3DCarousel(carouselProps);
+
+		$('.settings').html('<pre>$(".jR3DCarouselGallery").jR3DCarousel('+JSON.stringify(carouselProps, null, 4)+')</pre>')
 	}
-	function shown(slide){
+	function show(slide){
 		console.log("Slide shown: ", slide.find('img').attr('src'))
 	}
 	$('.carousel-props input').change(function(){
 		carouselProps[this.name] = this.value || null; 
 		for(var i = 0; i < 999; i++)
 	     clearInterval(i);
-		var slides = $('.jRCarouselGallery').find('.slide'); $('.jRCarouselGallery').empty();/* $('.jRCarouselGallery').append(slides); */ 
+		var slides = $('.jR3DCarouselGallery').find('.slide'); $('.jR3DCarouselGallery').empty();/* $('.jR3DCarouselGallery').append(slides); */ 
 		setUp();
 	})
 	
@@ -48,7 +50,7 @@
 		carouselProps[this.name] = getSlides(this.value); 
 		for (var i = 0; i < 999; i++)
 	     clearInterval(i);
-		$('.jRCarouselGallery').empty(); setUp();
+		$('.jR3DCarouselGallery').empty(); setUp();
 	});
 	
 	function getSlides(no){
@@ -59,327 +61,120 @@
 		return slides;
 	}
 	
-	carouselProps.slides = getSlides(7);
+	//carouselProps.slides = getSlides(7);
 	setUp()
-    });
-  </script>
-  <style>
-    @media screen and (min-width: 64em){
-			.page-header {
-    				padding: 0;
-    				margin: 0;
-			}
-			.project-name{
-				font-size: 2.25rem;
-				line-height: 1.45;
-    				font-weight: 700;
-			}
-			.wrapper{
-			    	width: 50%!important;
-			    	height: 299px!important;
-			    	float: left!important;
-			    	overflow: auto!important;
-			    	border-right: 2px solid #999!important;
-			    	padding: 0 34px;
-    			}
-    			.settings-container {
-				height: 299px!important;
-    			}
-		}
-	.jRCarouselGallery {
-		margin: 0 auto;
-	}
-	.settings-container {
-		width: 100%;
-		height: 1299px;
-		padding-right: 15px;
-		padding-left: 15px;
-		margin-right: auto;
-		margin-left: auto;
-		text-align: left;
-	}
-    
-    .wrapper div{
-	    margin: 5px auto;
-    }
-    .wrapper {
-    	width: 100%;
-    	height: 400px;
-    	overflow: visible;
-    }
-    .page-header{
-    	overflow: hidden;
-    }
-    input[type=range]{
-    	display: inline;
-    	width: initial;
-    }
-    html {
-    	font-size: initial;
-    }
-  </style>
-  </head>
-  <body>
-    <section class="page-header">
-    <!--  <a class="btn btn-danger btn-xs pull-right" href="http://vinayakjadhav.github.io/jR3DCarousel#disqus_thread">Count</a>-->
-    <!--  <h1 class="project-name">jR3DCarousel - jQuery 3D Responsive Carousel</h1>-->
-      <div class="jRCarouselGallery"></div>
-      <hr/>
-      <section class="settings-container">
-        <div class="wrapper">
-	<h4>Options for jR3DCarousel</h4>
-	<span>Animation </span>
-	<div class="carousel-props btn-group" data-toggle="buttons">
-	 <label class="btn btn-primary btn-sm"><input type="radio" name="animation" value="slide" />slide</label>
-	 <label class="btn btn-primary active btn-sm"><input type="radio" name="animation" value="slide3D" checked="checked" />slide3D</label>
-	 <label class="btn btn-primary btn-sm"><input type="radio" name="animation" value="scroll"  />scroll</label>
-	 <label class="btn btn-primary btn-sm"><input type="radio" name="animation" value="scroll3D"  />scroll3D</label>
-	 <label class="btn btn-primary btn-sm"><input type="radio" name="animation" value="fade"  />fade</label>
+
+  })
+</script>
+
+<style type="text/css">
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+}
+
+.container {
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+	overflow: hidden;
+}
+
+.jR3DCarouselGallery,.jR3DCarouselGallery1 {
+	margin: 0 auto; /* optional - if want to center align */
+}
+
+.container {
+	text-align: center;
+}
+
+.wrapper {
+	padding-right: 10px;
+	padding-left: 10px;
+	width: 48%;
+	height: 299px;
+	float: left;
+	overflow: auto;
+	border-left: 1px solid #999;
+}
+
+.wrapper div {
+	margin: 8px auto;
+}
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1>jR3DCarousel - jQuery 3D Responsive Carousel</h1>
+		<br/>
+		<div>
+			<div class="jR3DCarouselGallery"></div>
+		</div>
+		<br/>
+		<hr/>
+		<!--
+		<div>
+			<h2>jR3DCarousel Gallery - with slides in template </h2>
+			<div class="jR3DCarouselGallery1">
+				<div class="slide"><img style="width: 70%" src="http://lorempixel.com//800/351" /><div style="width: 30%">This is custom Text</div></div>
+				<div class="slide"><img style="width: 70%" src="http://lorempixel.com//800/352" /><div style="width: 30%">This is custom Text</div></div>
+				<div class="slide"><img style="width: 70%" src="http://lorempixel.com//800/353" /><div style="width: 30%">This is custom Text</div></div>
+				<div class="slide"><img style="width: 70%" src="http://lorempixel.com//800/354" /><div style="width: 30%">This is custom Text</div></div>
+				<div class="slide"><img style="width: 70%" src="http://lorempixel.com//800/355" /><div style="width: 30%">This is custom Text</div></div>
+			</div>
+		</div>
+		<br/>
+		<hr/> -->
 	</div>
-	<span> Slide Layout </span>
-	<div class="carousel-props btn-group" data-toggle="buttons">
-	 <label class="btn btn-primary btn-sm active"><input type="radio" name="slideLayout" value="fill" checked="checked" />fill</label>
-	 <label class="btn btn-primary btn-sm"><input type="radio" name="slideLayout" value="contain"  />contain</label>
-	 <label class="btn btn-primary btn-sm"><input type="radio" name="slideLayout" value="cover"  />cover</label>
+	<div class="wrapper">
+	<h2>Options for jR3DCarousel</h2>
+	<div class="carousel-props" >
+	 <input type="radio" name="animation" value="slide" />slide
+	 <input type="radio" name="animation" value="slide3D" checked="checked" />slide3D
+	 <input type="radio" name="animation" value="scroll"  />scroll
+	 <input type="radio" name="animation" value="scroll3D"  />scroll3D
+	 <input type="radio" name="animation" value="fade"  />fade
+	 </div>
+	<div class="carousel-props" >
+	 <input type="radio" name="slideLayout" value="fill" checked="checked" />fill
+	 <input type="radio" name="slideLayout" value="contain"  />contain
+	 <input type="radio" name="slideLayout" value="cover"  />cover
 	</div>
-	<span>Navigation</span>
-	<div class="carousel-props btn-group" data-toggle="buttons">
-	 <label class="btn btn-primary btn-sm active"><input type="radio" name="navigation" value="circle" checked="checked" />circle</label>
-	 <label class="btn btn-primary btn-sm"><input type="radio" name="navigation" value="square"  />square</label>
-	 <label class="btn btn-primary btn-sm"><input type="radio" name="navigation" value="" />None</label>
+	<div class="carousel-props" >
+	 <input type="radio" name="animationCurve" value="ease" checked="checked" />ease
+	 <input type="radio" name="animationCurve" value="ease-in"  />ease-in
+	 <input type="radio" name="animationCurve" value="ease-out"  />ease-out
+	 <input type="radio" name="animationCurve" value="ease-in-out"  />ease-in-out
+	 <input type="radio" name="animationCurve" value="linear"  />linear
+	 <input type="radio" name="animationCurve" value="cubic-bezier(0.4, 0.6, 0.11, 0.19)"  />cubic-bezier(0.4, 0.6, 0.11, 0.19) curve
 	</div>
-	<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Autoplay </span>
-	<div class="carousel-props btn-group" data-toggle="buttons">
-	 <label class="btn btn-primary btn-sm active"><input type="radio" name="autoplay" value="true" checked="checked" />autoplay</label>
-	 <label class="btn btn-primary btn-sm"><input type="radio" name="autoplay" value=""  />manual</label>
-	</div> <br/>
-	<span> Curve </span>
-	<div class="carousel-props btn-group" data-toggle="buttons">
-	 <label class="btn btn-primary btn-sm active"><input type="radio" name="animationCurve" value="ease" checked="checked" />ease</label>
-	 <label class="btn btn-primary btn-sm"><input type="radio" name="animationCurve" value="ease-in"  />ease-in</label>
-	 <label class="btn btn-primary btn-sm"><input type="radio" name="animationCurve" value="ease-out"  />ease-out</label>
-	 <label class="btn btn-primary btn-sm"><input type="radio" name="animationCurve" value="ease-in-out"  />ease-in-out</label>
-	 <label class="btn btn-primary btn-sm"><input type="radio" name="animationCurve" value="linear"  />linear</label>
-	 <label class="btn btn-primary btn-sm"><input type="radio" name="animationCurve" value="cubic-bezier(0.4, 0.6, 0.11, 0.19)" />cubic-bezier(0.4,0.6,0.11,0.19) curve</label>
+	<div class="carousel-props" >
+	 <input type="radio" name="navigation" value="circle" checked="checked" />circle
+	 <input type="radio" name="navigation" value="square"  />square
+	 <input type="radio" name="navigation" value="" />None
+	</div>
+	<div class="carousel-props" >
+	 <input type="radio" name="autoplay" value="true" checked="checked" />autoplay
+	 <input type="radio" name="autoplay" value=""  />manual
 	</div>
 	<div>
-	 Slides  <input type="range" min="1" max="20" value="4" name="slides" />
+	 	<input type="range" min="1" max="20" value="4" name="slides" /> Slides
 	</div>
 	<div class="carousel-props" >
-	 Width  <input type="range" min="200" max="1366" name="width" />
-	 Height  <input type="range" min="200" max="720" name="height" />
+		<input type="range" min="100" max="1366" name="width" />Width
+		<input type="range" min="100" max="720" name="height" />Height
 	</div>
 	<div class="carousel-props" >
-	 animationDuration  <input type="range" min="100" max="2000" name="animationDuration" />
-	 animationInterval <input type="range" min="100" max="2000" name="animationInterval" />
+	 	<input type="range" min="10" max="2000" name="animationDuration" />animationDuration
+		<input type="range" min="10" max="2000" name="animationInterval" />animationInterval
 	</div>
 	</div>
 	<div class="wrapper">
-		<h4>Code generated to getting started</h4>
-		<!-- <iframe width="100%" height="40" src="https://jsfiddle.net/vinayakjadhav/3KBFR/embedded/result" allowfullscreen="allowfullscreen" frameborder="0"></iframe> -->
+		<h2>Code to getting started</h2>
 		<div class="settings"></div>
-		<code>Note: Latest chrome has some issues in rendering.. On previous stable chrome & all other browsers works fine.</code>
+		<!-- <iframe width="100%" height="40" src="https://jsfiddle.net/vinayakjadhav/3KBFR/embedded/result" allowfullscreen="allowfullscreen" frameborder="0"></iframe> -->		
 	</div>
-	</section>
-	<!--<hr/>
-      <h2 class="project-tagline">jQuery Responsive 3D Carousel</h2>
-      <a href="https://github.com/vinayakjadhav/jR3DCarousel" class="btn">View on GitHub</a>
-      <a href="https://github.com/vinayakjadhav/jR3DCarousel/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/vinayakjadhav/jR3DCarousel/tarball/master" class="btn">Download .tar.gz</a>-->
-    </section>
-
-    <section class="main-content">
-    	<!--<div id="disqus_thread"></div>
-	<script>
-	/**
-	* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-	* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-	*/
-	
-	var disqus_config = function () {
-	this.page.url = 'http://vinayakjadhav.github.io/jR3DCarousel'; //PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
-	this.page.identifier = 4278789; //PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-	};
-	
-	(function() { // DON'T EDIT BELOW THIS LINE
-	var d = document, s = d.createElement('script');
-	
-	s.src = '//jr3dcarousel.disqus.com/embed.js';
-	
-	s.setAttribute('data-timestamp', +new Date());
-	(d.head || d.body).appendChild(s);
-	})();
-	</script>
-	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-      --><!--<h1>
-<a id="jr3dcarousel" class="anchor" href="#jr3dcarousel" aria-hidden="true"><span class="octicon octicon-link"></span></a>jR3DCarousel</h1>
-
-<p><strong>j</strong>Query <strong>R</strong>esponsive <strong>3D</strong> <strong>Carousel</strong> - <strong>jR3DCarousel</strong> by Vinayak Rangnathrao Jadhav</p>
-<h6>
-<a id="jr3dcarousel-is-a-jquery-plugin-for-responsive-3d-carousel-with-modern-effects-and-multiple-options" class="anchor" href="#jr3dcarousel-is-a-jquery-plugin-for-responsive-3d-carousel-with-modern-effects-and-multiple-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>jR3DCarousel is a jQuery plugin for responsive 3d carousel with modern effects and multiple options.</h6>
-<a href="http://www.freecounterstat.com" target="_Blank" title="website counter code">website counter code</a><br/>
-<script type="text/javascript" src="http://counter1.fcs.ovh/private/countertab.js?c=c0696cef195d6254764984f09d514003&FCS_type=999&FCS_coef=0.5&FCS_visi=1&FCS_clic=1&FCS_resc=cccccc&FCS_rest=tabLB&FCS_plus=0"></script>
-<h2>
-<a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
-
-<ul>
-<li>Modern effects including 3D effects</li>
-<li>Fullscreen Carousel</li>
-<li>Tiny plugin (gzipped ~ 1.68KB, uncompressed ~ 4.95KB)</li>
-<li>Infinite scroll</li>
-<li>Multiple slideLayouts to maintain aspect ratio of images</li>
-<li>Minimal configuration, easy to install</li>
-<li>Useful public API for extending the functionalities like custom nav buttons.</li>
-</ul>
-
-<h2>
-<a id="live-demo" class="anchor" href="#live-demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Live Demo</h2>
-
-<div><img src="https://cloud.githubusercontent.com/assets/7734229/11457324/f46c4d30-96cb-11e5-9281-b0141721b755.gif" /></div>
-
-<h2>
-<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
-
-<p>npm install jr3dcarousel</p>
-
-<h2>
-<a id="old-school-way" class="anchor" href="#old-school-way" aria-hidden="true"><span class="octicon octicon-link"></span></a>old school way</h2>
-
-<pre><code>&lt;!-- add jQuery if not already present in your project --&gt;
-</code></pre>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-k">&lt;</span>script src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js<span class="pl-pds">'</span></span><span class="pl-k">&gt;&lt;</span><span class="pl-k">/</span>script<span class="pl-k">&gt;</span></pre></div>
-
-<pre><code>&lt;!-- add jR3DCarousel plugin --&gt;
-</code></pre>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-k">&lt;</span>script src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>https://cdn.rawgit.com/vinayakjadhav/jR3DCarousel/master/dist/jR3DCarousel.min.js<span class="pl-pds">"</span></span><span class="pl-k">&gt;&lt;</span><span class="pl-k">/</span>script<span class="pl-k">&gt;</span></pre></div>
-
-<h5>
-<a id="setup-images-source" class="anchor" href="#setup-images-source" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup images source</h5>
-
-<pre><code>var slides = [
-    {src: 'http://lorempixel.com//1366/768'},
-    {src: 'http://lorempixel.com//1366/761'},
-    {src: 'http://lorempixel.com//1366/762'},
-    {src: 'http://lorempixel.com//1366/763'},
-    {src: 'http://lorempixel.com//1366/764'},
-    {src: 'http://lorempixel.com//1366/765'},
-    {src: 'http://lorempixel.com//1366/766'}
-];
-</code></pre>
-
-<h5>
-<a id="minimal-configuration-with-defaults" class="anchor" href="#minimal-configuration-with-defaults" aria-hidden="true"><span class="octicon octicon-link"></span></a>Minimal configuration with defaults</h5>
-
-<pre><code>$('.jR3DCarouselGallery').jR3DCarousel({
-                    slides: slides
-                });
-</code></pre>
-
-<h5>
-<a id="configuring-all-available-options" class="anchor" href="#configuring-all-available-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuring all available options</h5>
-
-<pre><code>$('.jR3DCarouselGallery').jR3DCarousel({
-    width: 800,                 /* largest allowed width */
-    height: 356,                /* largest allowed height */
-    slides: slides,             /* array of images source or gets slides by 'slide' class */
-    slideLayout : 'contain',    /* "contain"-fit as per to aspect ratio | "fill"-stretches to fill |  "cover"-overflows but maintains ratio */
-    animation: 'scroll',        /* slide | scroll | fade | zoomInSlide | zoomInScroll */
-    animationDuration: 400,     /* animation speed in milliseconds */
-    animationInterval: 4000,    /* Interval between transitions or per slide show time in milliseconds */
-    autoplay: true,             /* start playing Carousel continuously, pauses when slide is hovered */
-    onSlideShow: shown,         /* callback when Slide show event occurs */
-    navigation: 'circles'       /* circles | squares */
-});
-</code></pre>
-
-<h5>
-<a id="images-source-provided-in-javascript" class="anchor" href="#images-source-provided-in-javascript" aria-hidden="true"><span class="octicon octicon-link"></span></a>Images source provided in javascript</h5>
-
-<pre><code>&lt;div class="jR3DCarouselGallery"&gt;&lt;/div&gt;
-</code></pre>
-
-<h5>
-<a id="slides-using-custom-template-by-adding-class-slide" class="anchor" href="#slides-using-custom-template-by-adding-class-slide" aria-hidden="true"><span class="octicon octicon-link"></span></a>Slides using custom template by adding class <code>slide</code>
-</h5>
-
-<pre><code>&lt;div class="jR3DCarouselGallery"&gt;
-  &lt;div class="slide"&gt;&lt;img src="http://lorempixel.com//800/351" /&gt;&lt;/div&gt;
-  &lt;div class="slide"&gt;&lt;img src="http://lorempixel.com//800/352" /&gt;&lt;/div&gt;
-  &lt;div class="slide"&gt;&lt;img src="http://lorempixel.com//800/353" /&gt;&lt;/div&gt;
-  &lt;div class="slide"&gt;&lt;img src="http://lorempixel.com//800/354" /&gt;&lt;/div&gt;
-  &lt;div class="slide"&gt;&lt;img src="http://lorempixel.com//800/355" /&gt;&lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-
-<h2>
-<a id="jr3dcarousel-example" class="anchor" href="#jr3dcarousel-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>jR3DCarousel Example</h2>
-
-<h2>
-<a id="public-api" class="anchor" href="#public-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Public API</h2>
-
-<ul>
-<li>
-<h5>
-<a id="showslideslideindex---" class="anchor" href="#showslideslideindex---" aria-hidden="true"><span class="octicon octicon-link"></span></a>showSlide(slideIndex)   :</h5>
-
-<pre><code>shows the slide specified by the slideIndex by running animation, the slideIndex starts from 0.
-</code></pre>
-</li>
-<li>
-<h5>
-<a id="showpreviousslide-----" class="anchor" href="#showpreviousslide-----" aria-hidden="true"><span class="octicon octicon-link"></span></a>showPreviousSlide()     :</h5>
-
-<pre><code>shows the previous slide from current slide by running animation
-</code></pre>
-</li>
-<li>
-<h5>
-<a id="shownextslide-----" class="anchor" href="#shownextslide-----" aria-hidden="true"><span class="octicon octicon-link"></span></a>showNextSlide()     :</h5>
-
-<pre><code>shows the slide specified by the slideIndex by running animation
-</code></pre>
-</li>
-<li>
-<h5>
-<a id="getslidebyindexslideindex-" class="anchor" href="#getslidebyindexslideindex-" aria-hidden="true"><span class="octicon octicon-link"></span></a>getSlideByIndex(slideIndex) :</h5>
-
-<pre><code>returns the slide's jquery object specified by the slideIndex
-</code></pre>
-</li>
-<li>
-<h5>
-<a id="getcurrentslide-------" class="anchor" href="#getcurrentslide-------" aria-hidden="true"><span class="octicon octicon-link"></span></a>getCurrentSlide()       :</h5>
-
-<pre><code>returns the current slide's jQuery object
-</code></pre>
-</li>
-<li><h6>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h6></li>
-</ul>
-
-<pre><code>var myjR3DCarousel = $('.jR3DCarouselGallery').jR3DCarousel({
-                slides: slides
-});
-
-myjR3DCarousel.showSlide(0);
-myjR3DCarousel.showPreviousSlide();
-myjR3DCarousel.howNextSlide();
-var slide = myjR3DCarousel.getSlideByIndex(1);
-var currentSlide = myjR3DCarousel.getCurrentSlide();
-</code></pre>
-
-<hr>-->
-<!--
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/vinayakjadhav/jR3DCarousel">jR3DCarousel</a> is maintained by <a href="https://github.com/vinayakjadhav">vinayakjadhav</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>-->
-
-    </section>
-
- <!-- <script id="dsq-count-scr" src="//jr3dcarousel.disqus.com/count.js" async></script>-->
   </body>
 </html>
