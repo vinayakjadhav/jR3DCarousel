@@ -65,7 +65,7 @@
   </script>
   <style>
     #FCS_c0696cef195d6254764984f09d514003_divFix{
-    	visibility: hidden!important;
+    	position: relative!important;
     }
     
     @media screen and (min-width: 64em){
@@ -86,7 +86,7 @@
 				height: 299px!important;
     			}
     			#FCS_c0696cef195d6254764984f09d514003_divFix{
-    				visibility: visible!important;
+    				position: fixed!important;
     			}
 		}
 	.jRCarouselGallery {
@@ -190,6 +190,9 @@
       <a href="https://github.com/vinayakjadhav/jR3DCarousel" class="btn">View on GitHub</a>
       <a href="https://github.com/vinayakjadhav/jR3DCarousel/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/vinayakjadhav/jR3DCarousel/tarball/master" class="btn">Download .tar.gz</a>
+      <a href="http://www.freecounterstat.com" target="_Blank" title="website counter code">Free counter stat</a><br/>
+<script type="text/javascript" src="http://counter1.fcs.ovh/private/countertab.js?c=c0696cef195d6254764984f09d514003&FCS_type=999&FCS_coef=0.5&FCS_visi=1&FCS_clic=1&FCS_resc=cccccc&FCS_rest=tabLB&FCS_plus=0"></script>
+
     </section>
 
     <section class="main-content">
@@ -221,161 +224,14 @@
 <p><strong>j</strong>Query <strong>R</strong>esponsive <strong>3D</strong> <strong>Carousel</strong> - <strong>jR3DCarousel</strong> by Vinayak Rangnathrao Jadhav</p>
 <h6>
 <a id="jr3dcarousel-is-a-jquery-plugin-for-responsive-3d-carousel-with-modern-effects-and-multiple-options" class="anchor" href="#jr3dcarousel-is-a-jquery-plugin-for-responsive-3d-carousel-with-modern-effects-and-multiple-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>jR3DCarousel is a jQuery plugin for responsive 3d carousel with modern effects and multiple options.</h6>
-<a href="http://www.freecounterstat.com" target="_Blank" title="website counter code">website counter code</a><br/>
-<script type="text/javascript" src="http://counter1.fcs.ovh/private/countertab.js?c=c0696cef195d6254764984f09d514003&FCS_type=999&FCS_coef=0.5&FCS_visi=1&FCS_clic=1&FCS_resc=cccccc&FCS_rest=tabLB&FCS_plus=0"></script>
 <h2>
-<a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
-
-<ul>
-<li>Modern effects including 3D effects</li>
-<li>Fullscreen Carousel</li>
-<li>Tiny plugin (gzipped ~ 1.68KB, uncompressed ~ 4.95KB)</li>
-<li>Infinite scroll</li>
-<li>Multiple slideLayouts to maintain aspect ratio of images</li>
-<li>Minimal configuration, easy to install</li>
-<li>Useful public API for extending the functionalities like custom nav buttons.</li>
-</ul>
-
-<h2>
-<a id="live-demo" class="anchor" href="#live-demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Live Demo</h2>
+<a id="live-demo" class="anchor" href="#live-demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example gif</h2>
 
 <div><img src="https://cloud.githubusercontent.com/assets/7734229/11457324/f46c4d30-96cb-11e5-9281-b0141721b755.gif" /></div>
 
 <h2>
-<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
-
-<p>npm install jr3dcarousel</p>
-
-<h2>
-<a id="old-school-way" class="anchor" href="#old-school-way" aria-hidden="true"><span class="octicon octicon-link"></span></a>old school way</h2>
-
-<pre><code>&lt;!-- add jQuery if not already present in your project --&gt;
-</code></pre>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-k">&lt;</span>script src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js<span class="pl-pds">'</span></span><span class="pl-k">&gt;&lt;</span><span class="pl-k">/</span>script<span class="pl-k">&gt;</span></pre></div>
-
-<pre><code>&lt;!-- add jR3DCarousel plugin --&gt;
-</code></pre>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-k">&lt;</span>script src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>https://cdn.rawgit.com/vinayakjadhav/jR3DCarousel/master/dist/jR3DCarousel.min.js<span class="pl-pds">"</span></span><span class="pl-k">&gt;&lt;</span><span class="pl-k">/</span>script<span class="pl-k">&gt;</span></pre></div>
-
-<h5>
-<a id="setup-images-source" class="anchor" href="#setup-images-source" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup images source</h5>
-
-<pre><code>var slides = [
-    {src: 'http://lorempixel.com//1366/768'},
-    {src: 'http://lorempixel.com//1366/761'},
-    {src: 'http://lorempixel.com//1366/762'},
-    {src: 'http://lorempixel.com//1366/763'},
-    {src: 'http://lorempixel.com//1366/764'},
-    {src: 'http://lorempixel.com//1366/765'},
-    {src: 'http://lorempixel.com//1366/766'}
-];
-</code></pre>
-
-<h5>
-<a id="minimal-configuration-with-defaults" class="anchor" href="#minimal-configuration-with-defaults" aria-hidden="true"><span class="octicon octicon-link"></span></a>Minimal configuration with defaults</h5>
-
-<pre><code>$('.jR3DCarouselGallery').jR3DCarousel({
-                    slides: slides
-                });
-</code></pre>
-
-<h5>
-<a id="configuring-all-available-options" class="anchor" href="#configuring-all-available-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuring all available options</h5>
-
-<pre><code>$('.jR3DCarouselGallery').jR3DCarousel({
-    width: 800,                 /* largest allowed width */
-    height: 356,                /* largest allowed height */
-    slides: slides,             /* array of images source or gets slides by 'slide' class */
-    slideLayout : 'contain',    /* "contain"-fit as per to aspect ratio | "fill"-stretches to fill |  "cover"-overflows but maintains ratio */
-    animation: 'scroll',        /* slide | slide3D | scroll | scroll3D | fade */
-    animationDuration: 400,     /* animation speed in milliseconds */
-    animationInterval: 4000,    /* Interval between transitions or per slide show time in milliseconds */
-    autoplay: true,             /* start playing Carousel continuously, pauses when slide is hovered */
-    onSlideShow: shown,         /* callback when Slide show event occurs */
-    navigation: 'circles'       /* circles | squares */
-});
-</code></pre>
-
-<h5>
-<a id="images-source-provided-in-javascript" class="anchor" href="#images-source-provided-in-javascript" aria-hidden="true"><span class="octicon octicon-link"></span></a>Images source provided in javascript</h5>
-
-<pre><code>&lt;div class="jR3DCarouselGallery"&gt;&lt;/div&gt;
-</code></pre>
-
-<h5>
-<a id="slides-using-custom-template-by-adding-class-slide" class="anchor" href="#slides-using-custom-template-by-adding-class-slide" aria-hidden="true"><span class="octicon octicon-link"></span></a>Slides using custom template by adding class <code>slide</code>
-</h5>
-
-<pre><code>&lt;div class="jR3DCarouselGallery"&gt;
-  &lt;div class="slide"&gt;&lt;img src="http://lorempixel.com//800/351" /&gt;&lt;/div&gt;
-  &lt;div class="slide"&gt;&lt;img src="http://lorempixel.com//800/352" /&gt;&lt;/div&gt;
-  &lt;div class="slide"&gt;&lt;img src="http://lorempixel.com//800/353" /&gt;&lt;/div&gt;
-  &lt;div class="slide"&gt;&lt;img src="http://lorempixel.com//800/354" /&gt;&lt;/div&gt;
-  &lt;div class="slide"&gt;&lt;img src="http://lorempixel.com//800/355" /&gt;&lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-
-<h2>
-<a id="jr3dcarousel-example" class="anchor" href="#jr3dcarousel-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>jR3DCarousel Example</h2>
-
-<h2>
-<a id="public-api" class="anchor" href="#public-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Public API</h2>
-
-<ul>
-<li>
-<h5>
-<a id="showslideslideindex---" class="anchor" href="#showslideslideindex---" aria-hidden="true"><span class="octicon octicon-link"></span></a>showSlide(slideIndex)   :</h5>
-
-<pre><code>shows the slide specified by the slideIndex by running animation, the slideIndex starts from 0.
-</code></pre>
-</li>
-<li>
-<h5>
-<a id="showpreviousslide-----" class="anchor" href="#showpreviousslide-----" aria-hidden="true"><span class="octicon octicon-link"></span></a>showPreviousSlide()     :</h5>
-
-<pre><code>shows the previous slide from current slide by running animation
-</code></pre>
-</li>
-<li>
-<h5>
-<a id="shownextslide-----" class="anchor" href="#shownextslide-----" aria-hidden="true"><span class="octicon octicon-link"></span></a>showNextSlide()     :</h5>
-
-<pre><code>shows the slide specified by the slideIndex by running animation
-</code></pre>
-</li>
-<li>
-<h5>
-<a id="getslidebyindexslideindex-" class="anchor" href="#getslidebyindexslideindex-" aria-hidden="true"><span class="octicon octicon-link"></span></a>getSlideByIndex(slideIndex) :</h5>
-
-<pre><code>returns the slide's jquery object specified by the slideIndex
-</code></pre>
-</li>
-<li>
-<h5>
-<a id="getcurrentslide-------" class="anchor" href="#getcurrentslide-------" aria-hidden="true"><span class="octicon octicon-link"></span></a>getCurrentSlide()       :</h5>
-
-<pre><code>returns the current slide's jQuery object
-</code></pre>
-</li>
-<li><h6>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h6></li>
-</ul>
-
-<pre><code>var myjR3DCarousel = $('.jR3DCarouselGallery').jR3DCarousel({
-                slides: slides
-});
-
-myjR3DCarousel.showSlide(0);
-myjR3DCarousel.showPreviousSlide();
-myjR3DCarousel.showNextSlide();
-var slide = myjR3DCarousel.getSlideByIndex(1);
-var currentSlide = myjR3DCarousel.getCurrentSlide();
-</code></pre>
-
+<a id="installation" class="anchor" href="https://github.com/vinayakjadhav/jR3DCarousel#jr3dcarousel" aria-hidden="true"><span class="octicon octicon-link"></span></a>Goto Installation & Documentation</h2>
 <hr>
-
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/vinayakjadhav/jR3DCarousel">jR3DCarousel</a> is maintained by <a href="https://github.com/vinayakjadhav">vinayakjadhav</a>.</span>
 
