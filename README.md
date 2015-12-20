@@ -73,12 +73,12 @@ $('.jR3DCarouselGallery').jR3DCarousel({
 	height: 356, 				/* largest allowed height */
 	slides: slides, 			/* array of images source or gets slides by 'slide' class */
 	slideLayout : 'contain',  	/* "contain"-fit as per to aspect ratio | "fill"-stretches to fill |  "cover"-overflows but maintains ratio */
-	animation: 'scroll', 		/* slide | scroll | fade | zoomInSlide | zoomInScroll */
+	animation: 'scroll', 		/* slide | slide3D | scroll | scroll3D | fade */
 	animationDuration: 400,    	/* animation speed in milliseconds */
 	animationInterval: 4000,	/* Interval between transitions or per slide show time in milliseconds */
 	autoplay: true,         	/* start playing Carousel continuously, pauses when slide is hovered */
 	onSlideShow: shown,			/* callback when Slide show event occurs */
-	navigation: 'circles'		/* circles | squares */
+	navigation: 'circles'		/* circles | squares | '' */
 });
 ```
 ##### Images source provided in javascript
