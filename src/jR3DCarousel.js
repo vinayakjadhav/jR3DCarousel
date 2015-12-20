@@ -1,7 +1,7 @@
 /**
  * Author: Vinayak Rangnathrao Jadhav
  * Project: jR3DCarousel
- * Version: 0.0.4
+ * Version: 0.0.5
  **/
 (function (factory) {
     if (typeof define === "function" && define.amd) {
@@ -18,14 +18,14 @@
 				width : 1349,				/* largest allowed width */
 				height: 668,				/* largest allowed height */
 				slides : [], 				/* array of images source or gets slides by 'slide' class */
-				slideLayout : 'contain', 	/* contain | fill | cover */
-				animation: 'slide', 		/* slide | scroll | fade | zoomInSlide | zoomInScroll */
+				slideLayout : 'fill', 		/* contain | fill | cover */
+				animation: 'slide3D', 		/* slide | slide3D | scroll | scroll3D | fade */
 				animationCurve: 'ease',		/* ease | ease-in | ease-out | ease-in-out | linear | bezier */
 				animationDuration: 700,
 				animationInterval: 2000,
 				autoplay: true,
 				controls: true,
-				navigation: 'circles', 			/* circles | squares */
+				navigation: 'circles', 		/* circles | squares */
 				onSlideShow: function(){}   /* callback when Slide show event occurs */
 		}
 		var _settings = $.extend( true, {}, _defaults, options );
