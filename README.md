@@ -12,6 +12,7 @@ jR3DCarousel is a derived from the origin project - [jRCarousel](https://github.
 - Tiny plugin (gzipped ~ 2.01KB, uncompressed ~ 4.95KB)
 - Infinite scroll
 - Multiple slideLayouts to maintain aspect ratio of images
+- Keyboard navigation & mouse drag slide support
 - Minimal configuration, easy to install
 - Useful public API for extending the functionalities like custom nav buttons.
  
@@ -28,11 +29,7 @@ npm install jr3dcarousel
 
 #### Using bower
 ```
-bower install jR3DCcarousel
-```
-Or
-```
-bower install jr3dcarousel
+bower install jR3DCcarousel					Or					bower install jr3dcarousel
 ```
 
 #### old school way
