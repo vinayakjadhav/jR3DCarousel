@@ -189,8 +189,10 @@
 				        rect.top < (innerHeight || document.documentElement.clientHeight);
 					
 					if(inView && e.which == 37){
+						clearInterval(_timer);
 						_previousButton.click();
 					}else if(inView && e.which == 39){
+						clearInterval(_timer);
 						_nextButton.click();
 					}
 
