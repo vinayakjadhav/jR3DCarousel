@@ -9,7 +9,7 @@ jR3DCarousel is a derived from the origin project - [jRCarousel](https://github.
 - Modern effects
 - Responsive
 - Fullscreen Carousel
-- Tiny plugin (gzipped ~ 1.68KB, uncompressed ~ 4.95KB)
+- Tiny plugin (gzipped ~ 2.01KB, uncompressed ~ 4.95KB)
 - Infinite scroll
 - Multiple slideLayouts to maintain aspect ratio of images
 - Minimal configuration, easy to install
