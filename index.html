@@ -37,10 +37,13 @@
 		console.log("Slide shown: ", slide.find('img').attr('src'))
 	}
 	$('.carousel-props input').change(function(){
-		carouselProps[this.name] = this.value || null; 
+		if(isNaN(this.value))
+			carouselProps[this.name] = this.value || null; 
+		else
+			carouselProps[this.name] = Number(this.value) || null; 
 		for(var i = 0; i < 999; i++)
 	     clearInterval(i);
-		var slides = $('.jRCarouselGallery').find('.slide'); $('.jRCarouselGallery').empty();/* $('.jRCarouselGallery').append(slides); */ 
+		$('.jRCarouselGallery').empty();
 		setUp();
 	})
 	
