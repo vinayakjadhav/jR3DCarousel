@@ -16,17 +16,17 @@
         $(document).ready(function(){
             var slides = [];
         	var carouselProps =  {
-			 		  width: 471, 				/* largest allowed width */
-					  height: 276, 				/* largest allowed height */
-					  slideLayout : 'fill',     /* "contain" (fit according to aspect ratio), "fill" (stretches object to fill) and "cover" (overflows box but maintains ratio) */
-					  animation: 'slide3D', 		/* slide | scroll | fade | zoomInSlide | zoomInScroll */
+			 		  width: 471, 			
+					  height: 276, 			
+					  slideLayout : 'fill',     
+					  animation: 'slide3D', 
 					  animationCurve: 'ease',
-					  animationDuration: 700,
+					  animationDuration: 1200,
 					  animationInterval: 1000,
 					  //autoplay: false,
-					  onSlideShow: shown,		/* callback when Slide show event occurs */
-					  navigation: 'circles',	/* circles | squares */
-					  slides: slides 			/* array of images source or gets slides by 'slide' class */
+					  onSlideShow: shown,	
+					  navigation: 'circles',
+					  slides: slides
 						  
 				}
 	function setUp(){
@@ -41,7 +41,7 @@
 			carouselProps[this.name] = this.value || null; 
 		else
 			carouselProps[this.name] = Number(this.value) || null; 
-		for(var i = 0; i < 999; i++)
+		for(var i = 0; i < 99999; i++)
 	     clearInterval(i);
 		$('.jRCarouselGallery').empty();
 		setUp();
@@ -49,7 +49,7 @@
 	
 	$('[name=slides]').change(function(){
 		carouselProps[this.name] = getSlides(this.value); 
-		for (var i = 0; i < 999; i++)
+		for (var i = 0; i < 99999; i++)
 	     clearInterval(i);
 		$('.jRCarouselGallery').empty(); setUp();
 	});
