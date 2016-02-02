@@ -1,7 +1,7 @@
 /**
  * Author: Vinayak Rangnathrao Jadhav
  * Project: jR3DCarousel
- * Version: 0.0.5
+ * Version: 0.0.6
  **/
 (function (factory) {
     if (typeof define === "function" && define.amd) {
