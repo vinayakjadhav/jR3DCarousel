@@ -11,10 +11,11 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" />
     <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
     <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js'></script>
-    <script type="text/javascript" src="https://cdn.rawgit.com/vinayakjadhav/jR3DCarousel/0.0.5/dist/jR3DCarousel.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/vinayakjadhav/jR3DCarousel/0.0.6/dist/jR3DCarousel.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
             var slides = [];
+            var jR3DCarousel;
         	var carouselProps =  {
 			 		  width: 471, 			
 					  height: 276, 			
@@ -23,6 +24,7 @@
 					  animationCurve: 'ease',
 					  animationDuration: 1200,
 					  animationInterval: 1000,
+					  //slideClass: 'jR3DCarouselCustomSlide',
 					  //autoplay: false,
 					  onSlideShow: shown,	
 					  navigation: 'circles',
@@ -30,7 +32,7 @@
 						  
 				}
 	function setUp(){
- 		$('.jRCarouselGallery').jR3DCarousel(carouselProps);
+ 		jR3DCarousel;$('.jRCarouselGallery').jR3DCarousel(carouselProps);
 		$('.settings').html('<pre>$(".jRCarouselGallery").jR3DCarousel('+JSON.stringify(carouselProps, null, 4)+')</pre>')
 	}
 	function shown(slide){
@@ -45,13 +47,14 @@
 	     clearInterval(i);
 		$('.jRCarouselGallery').empty();
 		setUp();
+		jR3DCarousel.showNextSlide();
 	})
 	
 	$('[name=slides]').change(function(){
 		carouselProps[this.name] = getSlides(this.value); 
 		for (var i = 0; i < 99999; i++)
 	     clearInterval(i);
-		$('.jRCarouselGallery').empty(); setUp();
+		$('.jRCarouselGallery').empty(); setUp(); jR3DCarousel.showNextSlide();
 	});
 	
 	function getSlides(no){
@@ -63,7 +66,7 @@
 	}
 	
 	carouselProps.slides = getSlides(7);
-	setUp()
+	setUp();
     });
   </script>
   <style>
@@ -170,7 +173,10 @@
 	 <label class="btn btn-primary btn-sm"><input type="radio" name="animationCurve" value="cubic-bezier(0.4, 0.6, 0.11, 0.19)" />cubic-bezier(0.4,0.6,0.11,0.19) curve</label>
 	</div>
 	<div>
-	 Slides  <input type="range" min="1" max="20" value="4" name="slides" />
+	 Slides  <input type="range" min="1" max="20" value="4" name="slides" /> 
+	 <span class="carousel-props" > 
+	  Perspective	<input type="number" min="0" max="2000" name="perspective" step="10" value="0" />
+		</span>
 	</div>
 	<!--<div class="carousel-props" >
 	 Width  <input type="range" min="200" max="1366" val="471" name="width" />
@@ -183,7 +189,7 @@
 	</div>
 	<div class="wrapper">
 		<h4>Code generated to getting started</h4>
-		<iframe width="140" height="40" src="//jsfiddle.net/vinayakjadhav/5ndp1tuc/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+		<iframe width="170" height="50" src="//jsfiddle.net/vinayakjadhav/5ndp1tuc/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 		<div class="settings"></div>
 	</div>
 	</section>
