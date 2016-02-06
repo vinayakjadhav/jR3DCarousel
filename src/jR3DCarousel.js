@@ -1,7 +1,7 @@
 /**
  * Author: Vinayak Rangnathrao Jadhav
  * Project: jR3DCarousel
- * Version: 0.0.5
+ * Version: 0.0.7
  **/
 (function (factory) {
     if (typeof define === "function" && define.amd) {
@@ -130,7 +130,7 @@
 				_previousButton = $( "<div class='previous controls' style='left: 8px; transform: rotate(-45deg);'></div>");
 				_nextButton = $( "<div class='next controls' style='right: 8px; transform: rotate(135deg);'></div>");
 				_previousButton.add(_nextButton).appendTo(_container)
-							   .css({position: 'absolute', top:'42%', zIndex:1, display: 'inline-block', padding: '16px', boxShadow: '2px 2px 0 rgba(255,255,255,0.9) inset', cursor:'pointer'})
+							   .css({position: 'absolute', top:'42%', zIndex:1, display: 'inline-block', padding: '1.2em', boxShadow: '2px 2px 0 rgba(255,255,255,0.9) inset', cursor:'pointer'})
 							   .hide();
 				
 				 /* event handlers */
@@ -146,60 +146,74 @@
 				});
 				
 				/* event handlers */	
-				_container.hover(function(){
+				_container.on('mouseenter touchstart',function(){
 					_previousButton.add(_nextButton).fadeIn();
-				},function(){
+				})
+				.on('mouseleave touchcancel',function(){
 					_previousButton.add(_nextButton).fadeOut();
 				});
 				
-				var mousePressed = false;
-				var oldPageX = 0;
-				var oldPageY = 0;
-				var moveDirection;
-				_container.on('mousedown', function(e){
-					e.preventDefault();
-					mousePressed = true;
-					oldPageX = e.pageX;
-					oldPageY = e.pageY;
-					moveDirection = "";
-				})
-				.on('mousemove', function(e){
-					e.preventDefault();
-					if(!mousePressed){
-						return;
-					}
-					if(Math.abs(oldPageX - e.pageX) > 20){
-							moveDirection = (oldPageX > e.pageX) ? "left" : "right";
-					}else if(Math.abs(oldPageY - e.pageY) > 20){
-							moveDirection = (oldPageY < e.pageY) ? "left" : "right";
-					}
-				})
-				.on('mouseup', function(){
-					mousePressed = false;
-					if(moveDirection == "left"){
+				_swipedetect(_container, function(swipedir){
+					clearInterval(_timer);
+				    //swipedir contains either "none", "left", "right", "up", or "down"	
+					if (swipedir =='left'){
 						_nextButton.click();
-					}
-					else if(moveDirection == "right"){
+					}else if (swipedir =='right'){
 						_previousButton.click();
-					}
-				});
-				
-				$(document).on('keydown', function(e){
-					var rect = _container[0].getBoundingClientRect();
-				    var inView = rect.bottom > 0 &&  rect.right > 0 &&
-				        rect.left < (innerWidth || document.documentElement.clientWidth) &&
-				        rect.top < (innerHeight || document.documentElement.clientHeight);
-					
-					if(inView && e.which == 37){
-						clearInterval(_timer);
-						_previousButton.click();
-					}else if(inView && e.which == 39){
-						clearInterval(_timer);
-						_nextButton.click();
+					}else if(_settings.animation.indexOf('scroll')!=-1){
+						if (swipedir =='down'){
+							_nextButton.click();
+						}else if (swipedir =='up'){
+							_previousButton.click();
+						}
 					}
 				});
 			}
 			
+			function _swipedetect(el, callback){
+				var touchsurface = el,
+				swipedir,
+				startX,
+				startY,
+				distX,
+				distY,
+				threshold = 20, //required min distance traveled to be considered swipe
+				restraint = 100, // maximum distance allowed at the same time in perpendicular direction
+				allowedTime = 700, // maximum time allowed to travel that distance
+				elapsedTime,
+				startTime,
+				handleswipe = callback || function(swipedir){}
+
+				touchsurface.on('touchstart', function(e){
+					var touchobj = e.originalEvent.changedTouches[0]
+					swipedir = 'none'
+						dist = 0
+						startX = touchobj.pageX
+						startY = touchobj.pageY
+						startTime = new Date().getTime() // record time when finger first makes contact with surface
+						//e.preventDefault()
+				})
+				.on('touchmove', function(e){
+					e.preventDefault() // prevent scrolling when inside DIV
+				})
+				.on('touchend', function(e){
+					var touchobj = e.originalEvent.changedTouches[0]
+					distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
+					distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
+					elapsedTime = new Date().getTime() - startTime // get time elapsed
+					if (elapsedTime <= allowedTime){ // first condition for awipe met
+						if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
+							swipedir = (distX < 0)? 'left' : 'right' // if dist traveled is negative, it indicates left swipe
+						}
+						else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
+							swipedir = (distY < 0)? 'up' : 'down' // if dist traveled is negative, it indicates up swipe
+						}
+					}
+					handleswipe(swipedir)
+					//e.preventDefault()
+				})
+			}
+				
 			function _createNavigation(){
 				var type = _settings.navigation;
 				var _navigation = $('<div class=navigation />').css({ position: 'absolute', bottom: 0, right: 0 });
