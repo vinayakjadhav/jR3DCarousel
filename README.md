@@ -41,7 +41,7 @@ bower install jR3DCcarousel					Or					bower install jr3dcarousel
 ```
 	<!-- add jR3DCarousel plugin -->
 ``` javascript
-<script src="https://cdn.rawgit.com/vinayakjadhav/jR3DCarousel/0.0.8/dist/jR3DCarousel.min.js"></script>
+<script src="https://cdn.rawgit.com/vinayakjadhav/jR3DCarousel/v0.0.8/dist/jR3DCarousel.min.js"></script>
 ```
 
 ##### Setup images source
