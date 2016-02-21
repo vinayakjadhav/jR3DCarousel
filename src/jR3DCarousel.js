@@ -1,7 +1,7 @@
 /**
  * Author: Vinayak Rangnathrao Jadhav
  * Project: jR3DCarousel
- * Version: 0.0.7
+ * Version: 0.0.8
  **/
 (function (factory) {
     if (typeof define === "function" && define.amd) {
@@ -153,6 +153,21 @@
 					_previousButton.add(_nextButton).fadeOut();
 				});
 				
+				$(document).on('keydown', function(e){
+					var rect = _container[0].getBoundingClientRect();
+				    var inView = rect.bottom > 0 &&  rect.right > 0 &&
+				        rect.left < (innerWidth || document.documentElement.clientWidth) &&
+				        rect.top < (innerHeight || document.documentElement.clientHeight);
+					
+					if(inView && e.which == 37){
+						clearInterval(_timer);
+						_previousButton.click();
+					}else if(inView && e.which == 39){
+						clearInterval(_timer);
+						_nextButton.click();
+					}
+				});
+				
 				_swipedetect(_container, function(swipedir){
 					clearInterval(_timer);
 				    //swipedir contains either "none", "left", "right", "up", or "down"	
@@ -170,24 +185,16 @@
 				});
 			}
 			
-			function _swipedetect(el, callback){
-				var touchsurface = el,
-				swipedir,
-				startX,
-				startY,
-				distX,
-				distY,
+			function _swipedetect(el, handleswipe){
+				var touchsurface = el, swipedir, startX, startY, distX,	distY,
 				threshold = 20, //required min distance traveled to be considered swipe
 				restraint = 100, // maximum distance allowed at the same time in perpendicular direction
 				allowedTime = 700, // maximum time allowed to travel that distance
-				elapsedTime,
-				startTime,
-				handleswipe = callback || function(swipedir){}
+				elapsedTime, startTime
 
 				touchsurface.on('touchstart', function(e){
 					var touchobj = e.originalEvent.changedTouches[0]
 					swipedir = 'none'
-						dist = 0
 						startX = touchobj.pageX
 						startY = touchobj.pageY
 						startTime = new Date().getTime() // record time when finger first makes contact with surface
@@ -223,7 +230,7 @@
 				if(type == 'circles'){
 					_navigation.find('.nav').css({ borderRadius: '12px' });
 				}
-				_navigation.find('.nav').css({ display: 'inline-block', margin: '5px', cursor: 'pointer', backgroundColor: 'rgba(255, 255, 255, 0.77)', width: '12px', height: '12px' })
+				_navigation.find('.nav').css({ display: 'inline-block', margin: '5px', cursor: 'pointer', backgroundColor: 'rgba(255, 255, 255, 0.77)', width: '12px', height: '12px', transition: 'all '+_settings.animationDuration+'ms ease' })
 										.first().css({ backgroundColor: 'rgba(0, 0, 0, 1)' });
 				_jR3DCarouselDiv.after(_navigation);
 				
@@ -327,7 +334,7 @@
 		function _slideCarouseld(){
 			/* set active nav icon */
 			_container.find('.nav').css({  backgroundColor: 'rgba(255, 255, 255, 0.77)' })
-			   .eq(_targetSlideIndex % _noOfSlides).css({ backgroundColor: 'rgba(0, 0, 0, 1)' });
+			   .eq(_targetSlideIndex % _noOfSlides).css({ backgroundColor: 'rgba(0, 0, 0, 0.77)' });
 			_currentSlideIndex = (Math.round(_rotationAngle /_baseAngle) - 1) % _noOfSlides;
 			_settings.onSlideShow.call(this, _getNextSlide());
 		}
