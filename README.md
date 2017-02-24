@@ -59,9 +59,10 @@ var slides = [
 
 ##### Minimal configuration with defaults
 ```
-$('.jR3DCarouselGallery').jR3DCarousel({
-					slides: slides
-				});
+$('.jR3DCarouselGallery')
+	.jR3DCarousel({
+			slides: slides
+	});
 ```
 
 ##### Configuring all available options
@@ -69,7 +70,7 @@ $('.jR3DCarouselGallery').jR3DCarousel({
 $('.jR3DCarouselGallery').jR3DCarousel({
  	width: 800, 				/* largest allowed width */
 	height: 356, 				/* largest allowed height */
-	slides: slides, 			/* array of images source or gets slides by 'slide' class */
+	slides: slides, 			/* array of images source or the class of slides from custom template e.g.'slide' */
 	slideLayout : 'contain',  	/* "contain"-fit as per to aspect ratio | "fill"-stretches to fill |  "cover"-overflows but maintains ratio */
 	animation: 'scroll', 		/* slide | slide3D | scroll | scroll3D | fade */
 	animationDuration: 400,    	/* animation speed in milliseconds */
@@ -84,7 +85,7 @@ $('.jR3DCarouselGallery').jR3DCarousel({
 <div class="jR3DCarouselGallery"></div>
 ```
 
-##### Slides using custom template by adding class `slide`
+##### Slides using custom template by adding some class e.g. `slide`
 ```
 <div class="jR3DCarouselGallery">
   <div class="slide"><img src="http://lorempixel.com//800/351" /></div>
@@ -93,6 +94,13 @@ $('.jR3DCarouselGallery').jR3DCarousel({
   <div class="slide"><img src="http://lorempixel.com//800/354" /></div>
   <div class="slide"><img src="http://lorempixel.com//800/355" /></div>
 </div>
+
+
+$('.jR3DCarouselGallery')
+	.jR3DCarousel({
+			slides: 'slide'
+	});
+
 ```
 ## Public API
 - ##### showSlide(slideIndex) 	:
@@ -110,12 +118,12 @@ $('.jR3DCarouselGallery').jR3DCarousel({
 - ##### getCurrentSlide()		:
 		returns the current slide's jQuery object
 
-- ###### Usage
+- ###### Sample Usage of public API
 ```
 var myjR3DCarousel = $('.jR3DCarouselGallery')
-						.jR3DCarousel({
-							slides: slides
-						});
+					.jR3DCarousel({
+						slides: slides
+					});
 
 myjR3DCarousel.showSlide(0);
 myjR3DCarousel.showPreviousSlide();
