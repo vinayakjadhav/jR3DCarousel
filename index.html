@@ -10,8 +10,8 @@ $(document).ready(function(){
 	var slides = [{src: '../jRCarousel/images/01.jpg'}, {src: '../jRCarousel/images/02.jpg'}, {src: '../jRCarousel/images/03.jpg'}, {src: '../jRCarousel/images/04.jpg'},{src: '../jRCarousel/images/05.jpg'}]
 	//var jR3DCarousel;
 	var carouselProps =  {
-			 		  width: 400, 				/* largest allowed width */
-					  height: 222, 				/* largest allowed height */
+			 		  width: 470, 				/* largest allowed width */
+					  height: 272, 				/* largest allowed height */
 					  slideLayout : 'fill',     /* "contain" (fit according to aspect ratio), "fill" (stretches object to fill) and "cover" (overflows box but maintains ratio) */
 					  animation: 'slide3D', 		/* slide | scroll | fade | zoomInSlide | zoomInScroll */
 					  animationCurve: 'ease',
@@ -24,9 +24,25 @@ $(document).ready(function(){
 					  slides: slides 			/* array of images source or gets slides by 'slide' class */
 						  
 				}
+	var carouselProps1 =  {
+	 		  width: 470, 				/* largest allowed width */
+			  height: 272, 				/* largest allowed height */
+			  slideLayout : 'fill',     /* "contain" (fit according to aspect ratio), "fill" (stretches object to fill) and "cover" (overflows box but maintains ratio) */
+			  animation: 'slide3D', 		/* slide | scroll | fade | zoomInSlide | zoomInScroll */
+			  animationCurve: 'ease',
+			  animationDuration: 700,
+			  animationInterval: 1000,
+			  slideClass: 'jR3DCarouselCustomSlide',
+			  autoplay: true,
+			  onSlideShow: show,		/* callback when Slide show event occurs */
+			  navigation: 'circles'	/* circles | squares */,
+			  perspective: 1200
+				  
+		}
+	
 	function setUp(){
- 		jR3DCarousel = $('.jR3DCarouselGallery').jR3DCarousel(carouselProps);
-
+ 		jR3DCarousel = $('.jR3DCarouselGallery').eq(0).jR3DCarousel(carouselProps);
+ 		
 		$('.settings').html('<pre>$(".jR3DCarouselGallery").jR3DCarousel('+JSON.stringify(carouselProps, null, 4)+')</pre>');		
 		
 	}
@@ -41,18 +57,18 @@ $(document).ready(function(){
 		
 		for(var i = 0; i < 999; i++)
 	     clearInterval(i);
-		$('.jR3DCarouselGallery').empty();
+		$('.jR3DCarouselGallery').eq(0).empty();
 		setUp();
-		jR3DCarousel.showNextSlide();
+		//jR3DCarousel.showNextSlide();
 	})
 	
 	$('[name=slides]').change(function(){
 		carouselProps[this.name] = getSlides(this.value); 
 		for (var i = 0; i < 999; i++)
 	     clearInterval(i);
-		$('.jR3DCarouselGallery').empty();
+		$('.jR3DCarouselGallery').eq(0).empty();
 		setUp();
-		jR3DCarousel.showNextSlide();		
+		//jR3DCarousel.showNextSlide();		
 	});
 	
 	function getSlides(no){
@@ -65,6 +81,7 @@ $(document).ready(function(){
 	
 	//carouselProps.slides = getSlides(7);
 	setUp()
+	jR3DCarousel1 = $('.jR3DCarouselGallery').eq(1).jR3DCarousel(carouselProps1);
 
   })
 </script>
@@ -82,6 +99,10 @@ body {
 	margin-right: auto;
 	margin-left: auto;
 	overflow: hidden;
+}
+.galleries{
+width: 50%;
+height: 100%;
 }
 
 .jR3DCarouselGallery,.jR3DCarouselGallery1 {
@@ -110,27 +131,33 @@ body {
 
 <body>
 	<div class="container">
-		<h1>jR3DCarousel - jQuery 3D Responsive Carousel</h1>
-		<br/>
-		<div>
-			<div class="jR3DCarouselGallery"></div>
+	<h1>jR3DCarousel - jQuery 3D Responsive Carousel</h1>
+		<div class="galleries" style="float:left">
+			<h4>jR3DCarousel - with default options</h4>
+			<div class="jR3DCarouselGallery"></div>			
 		</div>
-		<br/>
-		<hr/>
-		<!-- 
-		<div>
-			<h2>jR3DCarousel Gallery - with slides in template </h2>
+		 
+		<div class="galleries" style="float:right">
+			<h4>jR3DCarousel - with custom slides template & perspective </h4>
 			<div class="jR3DCarouselGallery">
-				<div class="jR3DCarouselCustomSlide"><img src="../jRCarousel/images/101.jpg" /><div style="position: relative; bottom:18px; background: rgba(238, 238, 238, 0.69);">This is custom Text</div></div>
-				<div class="jR3DCarouselCustomSlide"><img src="../jRCarousel/images/04.jpg" /><div style="position: relative; bottom:18px; background: rgba(238, 238, 238, 0.69);">This is custom Text</div></div>
-				<div class="jR3DCarouselCustomSlide"><img src="../jRCarousel/images/020.jpg" /><div style="position: relative; bottom:18px; background: rgba(238, 238, 238, 0.69);">This is custom Text</div></div>
-				<div class="jR3DCarouselCustomSlide"><img src="../jRCarousel/images/101.jpg" /><div style="position: relative; bottom:18px; background: rgba(238, 238, 238, 0.69);">This is custom Text</div></div>
-				<div class="jR3DCarouselCustomSlide"><img src="../jRCarousel/images/04.jpg" /><div style="position: relative; bottom:18px; background: rgba(238, 238, 238, 0.69);">This is custom Text</div></div>
+				<div class="jR3DCarouselCustomSlide"><img src="../jRCarousel/images/01.jpg" /><div class="captions">This is custom text slide 1</div></div>
+				<div class="jR3DCarouselCustomSlide"><img src="../jRCarousel/images/02.jpg" /><div class="captions">This is custom text slide 2</div></div>
+				<div class="jR3DCarouselCustomSlide"><img src="../jRCarousel/images/03.jpg" /><div class="captions">This is custom text slide 3</div></div>
+				<div class="jR3DCarouselCustomSlide"><img src="../jRCarousel/images/04.jpg" /><div class="captions">This is custom text slide 4</div></div>
+				<div class="jR3DCarouselCustomSlide"><img src="../jRCarousel/images/05.jpg" /><div class="captions">This is custom text slide 5</div></div>
+				<style>
+				.jR3DCarouselGallery .captions{
+					position: relative;
+					padding: 2px 0;
+					bottom:22px;
+					background: rgba(238, 238, 238, 0.69);				
+				}
+				</style>
 			</div>
 		</div>
-		<br/>
-		<hr/>  -->
 	</div>
+	<br/>
+	<hr/>
 	<div class="wrapper">
 	<h2>Options for jR3DCarousel</h2>
 	<div class="carousel-props" >

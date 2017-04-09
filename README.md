@@ -68,16 +68,20 @@ $('.jR3DCarouselGallery')
 ##### Configuring all available options
 ```
 $('.jR3DCarouselGallery').jR3DCarousel({
- 	width: 800, 				/* largest allowed width */
-	height: 356, 				/* largest allowed height */
-	slides: slides, 			/* array of images source or the class of slides from custom template e.g.'slide' */
-	slideLayout : 'contain',  	/* "contain"-fit as per to aspect ratio | "fill"-stretches to fill |  "cover"-overflows but maintains ratio */
-	animation: 'scroll', 		/* slide | slide3D | scroll | scroll3D | fade */
-	animationDuration: 400,    	/* animation speed in milliseconds */
-	animationInterval: 4000,	/* Interval between transitions or per slide show time in milliseconds */
-	autoplay: true,         	/* start playing Carousel continuously, pauses when slide is hovered */
-	onSlideShow: shownCallback,	/* callback when Slide show event occurs */
-	navigation: 'circles'		/* circles | squares | '' */
+ 	width : 1349,					/* largest allowed width */
+	height: 668,					/* largest allowed height */
+	slides : [{},{}], 				/* array of images source, optional in case of custom template  */
+	slideLayout : 'fill', 			/* "contain"-fit as per to aspect ratio | "fill"-stretches to fill |  "cover"-overflows but maintains ratio */
+	perspective: 0,					/* perspective - default is dynamic, perpendicular */
+	animation: 'slide3D', 			/* slide | slide3D | scroll | scroll3D | fade */
+	animationCurve: 'ease',			/* ease | ease-in | ease-out | ease-in-out | linear | bezier */
+	animationDuration: 700,			/* duration of animation transition in milliseconds */
+	animationInterval: 2000,		/* interval between transitions or per slide show time in milliseconds */
+	autoplay: true,					/* start playing Carousel continuously, pauses when slide is hovered  */
+	controls: true,					/* control buttons */
+	slideClass: 'jR3DCarouselSlide',/* name of the class of slides in custom template */
+	navigation: 'circles',			/* circles | squares | '' */
+	onSlideShow: function(){}		/* callback when slide show event occurs */
 });
 ```
 ##### Images source provided in javascript

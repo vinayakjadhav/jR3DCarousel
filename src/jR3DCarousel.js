@@ -15,20 +15,20 @@
 	
 	$.fn.jR3DCarousel = function(options){
 		var _defaults = {
-				width : 1349,				/* largest allowed width */
-				height: 668,				/* largest allowed height */
-				slides : [], 				/* array of images source or gets slides by 'slide' class */
-				slideLayout : 'fill', 		/* contain | fill | cover */
-				perspective: 0,				/* perspective | default dynamic perpendicular */
-				animation: 'slide3D', 		/* slide | slide3D | scroll | scroll3D | fade */
-				animationCurve: 'ease',		/* ease | ease-in | ease-out | ease-in-out | linear | bezier */
-				animationDuration: 700,
-				animationInterval: 2000,
-				autoplay: true,
-				controls: true,
-				slideClass: 'jR3DCarouselSlide',
-				navigation: 'circles', 		/* circles | squares */
-				onSlideShow: function(){}   /* callback when Slide show event occurs */
+				width : 1349,					/* largest allowed width */
+				height: 668,					/* largest allowed height */
+				slides : [], 					/* array of images source, optional in case of custom template  */
+				slideLayout : 'fill', 			/* contain | fill | cover */
+				perspective: 0,					/* perspective | default dynamic perpendicular */
+				animation: 'slide3D', 			/* slide | slide3D | scroll | scroll3D | fade */
+				animationCurve: 'ease',			/* ease | ease-in | ease-out | ease-in-out | linear | bezier */
+				animationDuration: 700,			/* speed of animation transition*/
+				animationInterval: 2000,		/* interval between transitions */
+				autoplay: true,					/* continuous play  */
+				controls: true,					/* control buttons */
+				slideClass: 'jR3DCarouselSlide',/* gets slides by 'slide' class */
+				navigation: 'circles',			/* circles | squares | '' */
+				onSlideShow: function(){}		/* callback when Slide show event occurs */
 		}
 		var _settings = $.extend( true, {}, _defaults, options );
 		var _container = this;
@@ -143,10 +143,10 @@
 				
 				 /* event handlers */
 				_previousButton.on('click', function(){
-					playPreviousSlide();
+					_playPreviousSlide();
 				});
 				_nextButton.on('click', function(){
-					playNextSlide();
+					_playNextSlide();
 				});
 				
 				/* event handlers */
@@ -176,7 +176,7 @@
 				/* touch navigation support */
 				_swipedetect(_container, function(swipedir){
 					_pausejR3DCarousel();
-				    //swipedir contains either "none", "left", "right", "up", or "down"	
+				    /* swipedir contains either "none", "left", "right", "up", or "down" */
 					if (swipedir =='left'){
 						_nextButton.click();
 					}else if (swipedir =='right'){
@@ -205,8 +205,7 @@
 				
 				 /* event handler */
 				_container.on('click', '.nav', function(){
-					_targetSlideIndex =  $(this).index();
-					_animations.run(_settings.animation, _targetSlideIndex);
+					_playSlideByIndex($(this).index());
 				});
 			}
 			
@@ -244,7 +243,7 @@
 		})();
 		
 		function _playjR3DCarousel(){
-			_timer = setInterval(playNextSlide, _settings.animationInterval+_settings.animationDuration);
+			_timer = setInterval(_playNextSlide, _settings.animationInterval+_settings.animationDuration);
 			//console.log("_playjR3DCarousel called");
 		}
 		function _pausejR3DCarousel(){
@@ -252,23 +251,30 @@
 			//console.log("_pausejR3DCarousel called");
 		}
 		
-		function playNextSlide(){
-			_currentSlideIndex = Math.round(_rotationAngle/_baseAngle);
+		function _playNextSlide(){
 			_targetSlideIndex = _currentSlideIndex + 1;
 			_animations.run(_settings.animation, _targetSlideIndex);
+			_slideCarouseld();
 		}
 		
-		function playPreviousSlide(){
-			_currentSlideIndex = Math.round(_rotationAngle/_baseAngle);
+		function _playPreviousSlide(){
 			_targetSlideIndex = _currentSlideIndex - 1;
 			_animations.run(_settings.animation, _targetSlideIndex);
+			_slideCarouseld();
+		}
+		
+		function _playSlideByIndex(relativeSlideIndex){
+			var _currentRoundNo = Math.floor(_currentSlideIndex / _noOfSlides);
+			_targetSlideIndex =  _currentRoundNo *_noOfSlides + relativeSlideIndex;
+			_animations.run(_settings.animation, _targetSlideIndex);
+			_slideCarouseld();
 		}
 		
 		function _getPreviousSlide(){
 			return _jR3DCarouselDiv.find('.'+_settings.slideClass).eq((_currentSlideIndex-1) % _noOfSlides);
 		}
 		function _getCurrentSlide(){
-			return _jR3DCarouselDiv.find('.'+_settings.slideClass).eq(_targetSlideIndex % _noOfSlides);
+			return _jR3DCarouselDiv.find('.'+_settings.slideClass).eq(_currentSlideIndex % _noOfSlides);
 		}
 		function _getNextSlide(){
 			return _jR3DCarouselDiv.find('.'+_settings.slideClass).eq((_currentSlideIndex+1) % _noOfSlides);
@@ -294,28 +300,24 @@
 			_container.css({ perspective: '', overflow: 'hidden' });
 			_rotationAngle = _baseAngle * targetSlideIndex;
 			_jR3DCarouselDiv.css({ transform: 'translateZ('+-_translateZ+'px) rotateY('+-_rotationAngle+'deg)' });
-			_slideCarouseld();
 		}
 		
 		function _slide3D(targetSlideIndex){
 			_container.css({ perspective: _perspective, overflow: 'visible' });
 			_rotationAngle = _baseAngle * targetSlideIndex;
 			_jR3DCarouselDiv.css({ transform: 'translateZ('+-_translateZ+'px) rotateY('+-_rotationAngle+'deg)' });
-			_slideCarouseld();
 		}
 		
 		function _scroll(targetSlideIndex){
 			_container.css({ perspective: '', overflow: 'hidden' });
 			_rotationAngle=_baseAngle * targetSlideIndex;
 			_jR3DCarouselDiv.css({ transform: 'translateZ('+-_translateZ+'px) rotateX('+-_rotationAngle+'deg)' });
-			_slideCarouseld();
 		}
 		
 		function _scroll3D(targetSlideIndex){
 			_container.css({ perspective: _perspective, overflow: 'visible' });
 			_rotationAngle=_baseAngle * targetSlideIndex;
 			_jR3DCarouselDiv.css({ transform: 'translateZ('+-_translateZ+'px) rotateX('+-_rotationAngle+'deg)' });
-			_slideCarouseld();
 		}
 		
 		function _fade(targetSlideIndex){
@@ -323,20 +325,20 @@
 			_rotationAngle = _baseAngle * targetSlideIndex;			
 			_jR3DCarouselDiv.css({ transform: 'translateZ('+-_translateZ+'px) rotateY('+-_rotationAngle+'deg)'});
 			_jR3DCarouselDiv.css({ opacity: 1 });
-			_slideCarouseld();
-		
 		}
 		
 		function _slideCarouseld(){
-			/* set active nav icon */
 			_container.find('.nav').css({  backgroundColor: 'rgba(255, 255, 255, 0.77)' })
 			   .eq(_targetSlideIndex % _noOfSlides).css({ backgroundColor: 'rgba(0, 0, 0, 0.77)' });
+			
+			_currentSlideIndex = Math.round(_rotationAngle/_baseAngle);
+			//console.log("_currentSlideIndex " +_currentSlideIndex)
 			_settings.onSlideShow.call(this, _getCurrentSlide());
 		}
 		
 		function _maintainResposive(){
-			_container.hide();
 			_container.width('100%');
+			_jR3DCarouselDiv.hide();
 			_width = _container.width() < _settings.width ? _container.width() : _settings.width;
 			_height = _width/_aspectRatio;
 			_container.css({width: _width+'px', height: _height+'px' });
@@ -351,7 +353,6 @@
 				_translateZ = (_width/2) / Math.tan(Math.PI/_noOfSlides);
 				_perspective = (_width/2) * Math.tan(2*Math.PI/_noOfSlides)+'px';
 			}
-			
 			_container.find('.'+_settings.slideClass).each(function(i){
 				var slide = $(this);
 				if(_settings.animation.indexOf('slide')!=-1){
@@ -365,8 +366,8 @@
 			});
 			_perspective = _settings.perspective || _perspective;
 			_jR3DCarouselDiv.css({ transform: 'translateZ('+-_translateZ+'px) rotateY('+-_rotationAngle+'deg)' });
+			_jR3DCarouselDiv.show();
 			_container.css({ perspective: _perspective });
-			_container.fadeIn();
 		}	
 		
 		function _swipedetect(el, handleswipe){
