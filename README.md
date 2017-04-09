@@ -30,7 +30,7 @@ npm install jr3dcarousel
 
 #### Using bower
 ```
-bower install jR3DCcarousel					Or					bower install jr3dcarousel
+bower install jR3DCcarousel		Or		bower install jr3dcarousel
 ```
 
 #### old school way
@@ -59,52 +59,53 @@ var slides = [
 
 ##### Minimal configuration with defaults
 ```
-$('.jR3DCarouselGallery')
-	.jR3DCarousel({
-			slides: slides
-	});
+var myjR3DCarousel = $('.jR3DCarouselGallery').jR3DCarousel({
+							slides: slides
+						});
 ```
 
 ##### Configuring all available options
 ```
 $('.jR3DCarouselGallery').jR3DCarousel({
- 	width :1349,				/* largest allowed width */
-	height: 668,				/* largest allowed height */
-	slides : [{},{}], 			/* array of images source, optional in case of custom template  */
-	slideLayout : 'fill', 			/* "contain"-fit as per to aspect ratio | "fill"-stretches to fill |
-						   "cover"-overflows but maintains ratio */
-	perspective: 0,				/* perspective - default is dynamic, perpendicular */
-	animation: 'slide3D', 			/* slide | slide3D | scroll | scroll3D | fade */
-	animationCurve: 'ease',			/* ease | ease-in | ease-out | ease-in-out | linear | bezier */
-	animationDuration: 700,			/* duration of animation transition in milliseconds */
-	animationInterval: 2000,		/* interval between transitions or per slide show time in milliseconds */
-	autoplay: true,				/* start playing Carousel continuously, pauses when slide is hovered  */
-	controls: true,				/* control buttons */
-	slideClass: 'jR3DCarouselSlide',	/* name of the class of slides in custom template */
-	navigation: 'circles',			/* circles | squares | '' */
-	onSlideShow: function(){}		/* callback when slide show event occurs */
+ 	width :1349,			/* largest allowed width */
+	height: 668,			/* largest allowed height */
+	slides : [{},{}], 		/* array of images source, optional in case of custom template  */
+	slideLayout : 'fill', 		/* "contain"-fit as per to aspect ratio | "fill"-stretches to fill |
+					   "cover"-overflows but maintains ratio */
+	perspective: 0,			/* perspective - default is dynamic, perpendicular */
+	animation: 'slide3D', 		/* slide | slide3D | scroll | scroll3D | fade */
+	animationCurve: 'ease',		/* ease | ease-in | ease-out | ease-in-out | linear | bezier */
+	animationDuration: 700,		/* duration of animation transition in milliseconds */
+	animationInterval: 2000,	/* interval between transitions or per slide show time in milliseconds */
+	autoplay: true,			/* start playing Carousel continuously, pauses when slide is hovered  */
+	controls: true,			/* control buttons */
+	slideClass: 'jR3DCarouselSlide',/* name of the class of slides in custom template */
+	navigation: 'circles',		/* circles | squares | '' */
+	onSlideShow: function(){}	/* callback when slide show event occurs */
 });
 ```
 ##### Images source provided in javascript
 ```
 <div class="jR3DCarouselGallery"></div>
+var myjR3DCarousel = $('.jR3DCarouselGallery').jR3DCarousel({
+							slides: slides
+						});
 ```
 
-##### Slides using custom template by adding some class e.g. `slide`
+##### Slides using custom template by adding some class e.g. `mySlide`
 ```
 <div class="jR3DCarouselGallery">
-  <div class="slide"><img src="http://lorempixel.com//800/351" /></div>
-  <div class="slide"><img src="http://lorempixel.com//800/352" /></div>
-  <div class="slide"><img src="http://lorempixel.com//800/353" /></div>
-  <div class="slide"><img src="http://lorempixel.com//800/354" /></div>
-  <div class="slide"><img src="http://lorempixel.com//800/355" /></div>
+  <div class="mySlide"><img src="http://lorempixel.com//800/351" /></div>
+  <div class="mySlide"><img src="http://lorempixel.com//800/352" /></div>
+  <div class="mySlide"><img src="http://lorempixel.com//800/353" /></div>
+  <div class="mySlide"><img src="http://lorempixel.com//800/354" /></div>
+  <div class="mySlide"><img src="http://lorempixel.com//800/355" /></div>
 </div>
 
 
-$('.jR3DCarouselGallery')
-	.jR3DCarousel({
-			slides: 'slide'
-	});
+var myjR3DCarousel = $('.jR3DCarouselGallery').jR3DCarousel({
+							slideClass: 'mySlide',
+						});
 
 ```
 ## Public API
@@ -138,6 +139,8 @@ var myjR3DCarousel = $('.jR3DCarouselGallery').jR3DCarousel({
 myjR3DCarousel.showSlide(0);
 myjR3DCarousel.showPreviousSlide();
 myjR3DCarousel.showNextSlide();
+myjR3DCarousel.playCarousel();
+myjR3DCarousel.pauseCarousel();
 var slide = myjR3DCarousel.getSlideByIndex(1);
 var currentSlide = myjR3DCarousel.getCurrentSlide();
 ```
