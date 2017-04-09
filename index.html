@@ -7,8 +7,8 @@
 <script type="text/javascript" src="dist/jR3DCarousel.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	var slides = [{src: '../jRCarousel/images/101.jpg'}, {src: '../jRCarousel/images/04.jpg'}, {src: '../jRCarousel/images/020.jpg'}, {src: '../jRCarousel/images/03.jpg'},{src: '../jRCarousel/images/101.jpg'}, {src: '../jRCarousel/images/04.jpg'}, {src: '../jRCarousel/images/020.jpg'}, {src: '../jRCarousel/images/03.jpg'}]
-	var jR3DCarousel;
+	var slides = [{src: '../jRCarousel/images/01.jpg'}, {src: '../jRCarousel/images/02.jpg'}, {src: '../jRCarousel/images/03.jpg'}, {src: '../jRCarousel/images/04.jpg'},{src: '../jRCarousel/images/05.jpg'}]
+	//var jR3DCarousel;
 	var carouselProps =  {
 			 		  width: 400, 				/* largest allowed width */
 					  height: 222, 				/* largest allowed height */
@@ -18,7 +18,7 @@ $(document).ready(function(){
 					  animationDuration: 700,
 					  animationInterval: 1000,
 					  //slideClass: 'jR3DCarouselCustomSlide',
-					  autoplay: false,
+					  autoplay: true,
 					  onSlideShow: show,		/* callback when Slide show event occurs */
 					  navigation: 'circles',	/* circles | squares */
 					  slides: slides 			/* array of images source or gets slides by 'slide' class */

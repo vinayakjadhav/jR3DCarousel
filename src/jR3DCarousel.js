@@ -1,7 +1,7 @@
 /**
  * Author: Vinayak Rangnathrao Jadhav
  * Project: jR3DCarousel
- * Version: 0.0.8
+ * Version: 1.0.0
  **/
 (function (factory) {
     if (typeof define === "function" && define.amd) {
@@ -69,10 +69,18 @@
 			/* start jR3DCarousel if autoplay */
 			if(_settings.autoplay){
 				_playjR3DCarousel();
+				
+				/* event handlers */
+				_container.hover(function(){
+					_pausejR3DCarousel();
+				},function(){
+					_playjR3DCarousel();
+				});
 			}
 			
 			/* adjust size according to device */
 			addEventListener('resize', _maintainResposive);
+			
 			_maintainResposive();
 			
 			function createjR3DCarousel(){
@@ -135,17 +143,13 @@
 				
 				 /* event handlers */
 				_previousButton.on('click', function(){
-					_currentSlideIndex = Math.round(_rotationAngle/_baseAngle);
-					_targetSlideIndex = _currentSlideIndex-1;
-					_animations.run(_settings.animation, _targetSlideIndex);
+					playPreviousSlide();
 				});
 				_nextButton.on('click', function(){
-					_currentSlideIndex = Math.round(_rotationAngle/_baseAngle);
-					_targetSlideIndex = _currentSlideIndex+1;
-					_animations.run(_settings.animation, _targetSlideIndex);
+					playNextSlide();
 				});
 				
-				/* event handlers */	
+				/* event handlers */
 				_container.on('mouseenter touchstart',function(){
 					_previousButton.add(_nextButton).fadeIn();
 				})
@@ -153,6 +157,7 @@
 					_previousButton.add(_nextButton).fadeOut();
 				});
 				
+				/* keyboard navigation keys support */
 				$(document).on('keydown', function(e){
 					var rect = _container[0].getBoundingClientRect();
 				    var inView = rect.bottom > 0 &&  rect.right > 0 &&
@@ -160,16 +165,17 @@
 				        rect.top < (innerHeight || document.documentElement.clientHeight);
 					
 					if(inView && e.which == 37){
-						clearInterval(_timer);
+						_pausejR3DCarousel();
 						_previousButton.click();
 					}else if(inView && e.which == 39){
-						clearInterval(_timer);
+						_pausejR3DCarousel();
 						_nextButton.click();
 					}
 				});
 				
+				/* touch navigation support */
 				_swipedetect(_container, function(swipedir){
-					clearInterval(_timer);
+					_pausejR3DCarousel();
 				    //swipedir contains either "none", "left", "right", "up", or "down"	
 					if (swipedir =='left'){
 						_nextButton.click();
@@ -184,50 +190,13 @@
 					}
 				});
 			}
-			
-			function _swipedetect(el, handleswipe){
-				var touchsurface = el, swipedir, startX, startY, distX,	distY,
-				threshold = 20, //required min distance traveled to be considered swipe
-				restraint = 100, // maximum distance allowed at the same time in perpendicular direction
-				allowedTime = 700, // maximum time allowed to travel that distance
-				elapsedTime, startTime
-
-				touchsurface.on('touchstart', function(e){
-					var touchobj = e.originalEvent.changedTouches[0]
-					swipedir = 'none'
-						startX = touchobj.pageX
-						startY = touchobj.pageY
-						startTime = new Date().getTime() // record time when finger first makes contact with surface
-						//e.preventDefault()
-				})
-				.on('touchmove', function(e){
-					e.preventDefault() // prevent scrolling when inside DIV
-				})
-				.on('touchend', function(e){
-					var touchobj = e.originalEvent.changedTouches[0]
-					distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
-					distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
-					elapsedTime = new Date().getTime() - startTime // get time elapsed
-					if (elapsedTime <= allowedTime){ // first condition for awipe met
-						if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
-							swipedir = (distX < 0)? 'left' : 'right' // if dist traveled is negative, it indicates left swipe
-						}
-						else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
-							swipedir = (distY < 0)? 'up' : 'down' // if dist traveled is negative, it indicates up swipe
-						}
-					}
-					handleswipe(swipedir)
-					//e.preventDefault()
-				})
-			}
 				
 			function _createNavigation(){
-				var type = _settings.navigation;
 				var _navigation = $('<div class=navigation />').css({ position: 'absolute', bottom: 0, right: 0 });
 				for(var i = 0;  i < _noOfSlides; i++){
 					_navigation.append('<div class=nav></div>');
 				}
-				if(type == 'circles'){
+				if(_settings.navigation == 'circles'){
 					_navigation.find('.nav').css({ borderRadius: '12px' });
 				}
 				_navigation.find('.nav').css({ display: 'inline-block', margin: '5px', cursor: 'pointer', backgroundColor: 'rgba(255, 255, 255, 0.77)', width: '12px', height: '12px', transition: 'all '+_settings.animationDuration+'ms ease' })
@@ -241,35 +210,68 @@
 				});
 			}
 			
-			function _playjR3DCarousel(){
-				_timer = setInterval(function(){
-								_currentSlideIndex = Math.round(_rotationAngle/_baseAngle);
-								_targetSlideIndex = _currentSlideIndex+1;
-								_animations.run(_settings.animation, _targetSlideIndex);
-							}, _settings.animationInterval+_settings.animationDuration);
-				
-				/* event handlers */	
-				_container.hover(function(){
-					clearInterval(_timer);
-				},function(){
-					_timer = setInterval(function(){
-									_currentSlideIndex = Math.round(_rotationAngle/_baseAngle);
-									_targetSlideIndex = _currentSlideIndex+1;
-									_animations.run(_settings.animation, _targetSlideIndex);
-								}, _settings.animationInterval+_settings.animationDuration);
-				});
-			}
+			var visibilityCheck = (function(){
+				var stateKey, eventKey, keys = {
+					hidden: "visibilitychange",
+					webkitHidden: "webkitvisibilitychange",
+					mozHidden: "mozvisibilitychange",
+					msHidden: "msvisibilitychange"
+				};
+				for (stateKey in keys) {
+					if (stateKey in document) {
+						eventKey = keys[stateKey];
+						break;
+					}
+				}
+				return function(callback) {
+					if (callback) {
+						document.addEventListener(eventKey, callback);
+					}
+					return !document[stateKey];
+				}
+			})();
+			
+			visibilityCheck(function(){
+				if(visibilityCheck()){
+					//console.log("vis")
+					_playjR3DCarousel();
+				}else{
+					//console.log("not vis")
+					_pausejR3DCarousel();
+				}
+			});
 						
 		})();
 		
+		function _playjR3DCarousel(){
+			_timer = setInterval(playNextSlide, _settings.animationInterval+_settings.animationDuration);
+			//console.log("_playjR3DCarousel called");
+		}
+		function _pausejR3DCarousel(){
+			clearInterval(_timer);
+			//console.log("_pausejR3DCarousel called");
+		}
+		
+		function playNextSlide(){
+			_currentSlideIndex = Math.round(_rotationAngle/_baseAngle);
+			_targetSlideIndex = _currentSlideIndex + 1;
+			_animations.run(_settings.animation, _targetSlideIndex);
+		}
+		
+		function playPreviousSlide(){
+			_currentSlideIndex = Math.round(_rotationAngle/_baseAngle);
+			_targetSlideIndex = _currentSlideIndex - 1;
+			_animations.run(_settings.animation, _targetSlideIndex);
+		}
+		
 		function _getPreviousSlide(){
-			return _jR3DCarouselDiv.find('.'+_settings.slideClass).eq((_currentSlideIndex-1)%_noOfSlides);
+			return _jR3DCarouselDiv.find('.'+_settings.slideClass).eq((_currentSlideIndex-1) % _noOfSlides);
 		}
 		function _getCurrentSlide(){
-			return _jR3DCarouselDiv.find('.'+_settings.slideClass).eq(_currentSlideIndex);
+			return _jR3DCarouselDiv.find('.'+_settings.slideClass).eq(_targetSlideIndex % _noOfSlides);
 		}
 		function _getNextSlide(){
-			return _jR3DCarouselDiv.find('.'+_settings.slideClass).eq((_currentSlideIndex+1)%_noOfSlides);
+			return _jR3DCarouselDiv.find('.'+_settings.slideClass).eq((_currentSlideIndex+1) % _noOfSlides);
 		}
 		function _getSlideByIndex(idx){
 			return _jR3DCarouselDiv.find('.'+_settings.slideClass+'[data-index='+idx+']');
@@ -318,28 +320,22 @@
 		
 		function _fade(targetSlideIndex){
 			_jR3DCarouselDiv.css({ transition: 'opacity '+ _settings.animationDuration+'ms '+_settings.animationCurve, opacity: 0});
-			/* set active nav icon */
-			_container.find('.nav').css({  backgroundColor: 'rgba(255, 255, 255, 0.77)' })
-								   .eq(_targetSlideIndex % _noOfSlides).css({ backgroundColor: 'rgba(0, 0, 0, 1)' });
-			clearTimeout(_tt);
-			var _tt = setTimeout(function(){
-				_rotationAngle = _baseAngle * targetSlideIndex;
-				_jR3DCarouselDiv.css({ transform: 'translateZ('+-_translateZ+'px) rotateY('+-_rotationAngle+'deg)', opacity: 1 });
-				
-				_currentSlideIndex = (Math.round(_rotationAngle /_baseAngle) - 1) % _noOfSlides;
-				_settings.onSlideShow.call(this, _getNextSlide());
-			}, _settings.animationDuration);
+			_rotationAngle = _baseAngle * targetSlideIndex;			
+			_jR3DCarouselDiv.css({ transform: 'translateZ('+-_translateZ+'px) rotateY('+-_rotationAngle+'deg)'});
+			_jR3DCarouselDiv.css({ opacity: 1 });
+			_slideCarouseld();
+		
 		}
 		
 		function _slideCarouseld(){
 			/* set active nav icon */
 			_container.find('.nav').css({  backgroundColor: 'rgba(255, 255, 255, 0.77)' })
 			   .eq(_targetSlideIndex % _noOfSlides).css({ backgroundColor: 'rgba(0, 0, 0, 0.77)' });
-			_currentSlideIndex = (Math.round(_rotationAngle /_baseAngle) - 1) % _noOfSlides;
-			_settings.onSlideShow.call(this, _getNextSlide());
+			_settings.onSlideShow.call(this, _getCurrentSlide());
 		}
 		
 		function _maintainResposive(){
+			_container.hide();
 			_container.width('100%');
 			_width = _container.width() < _settings.width ? _container.width() : _settings.width;
 			_height = _width/_aspectRatio;
@@ -370,9 +366,46 @@
 			_perspective = _settings.perspective || _perspective;
 			_jR3DCarouselDiv.css({ transform: 'translateZ('+-_translateZ+'px) rotateY('+-_rotationAngle+'deg)' });
 			_container.css({ perspective: _perspective });
+			_container.fadeIn();
 		}	
 		
-		/* public API */
+		function _swipedetect(el, handleswipe){
+			var touchsurface = el, swipedir, startX, startY, distX,	distY,
+			threshold = 20, //required min distance traveled to be considered swipe
+			restraint = 100, // maximum distance allowed at the same time in perpendicular direction
+			allowedTime = 700, // maximum time allowed to travel that distance
+			elapsedTime, startTime
+
+			touchsurface.on('touchstart', function(e){
+				var touchobj = e.originalEvent.changedTouches[0]
+				swipedir = 'none'
+				startX = touchobj.pageX
+				startY = touchobj.pageY
+				startTime = new Date().getTime() // record time when finger first makes contact with surface
+				//e.preventDefault()
+			})
+			.on('touchmove', function(e){
+				e.preventDefault() // prevent scrolling when inside DIV
+			})
+			.on('touchend', function(e){
+				var touchobj = e.originalEvent.changedTouches[0]
+				distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
+				distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
+				elapsedTime = new Date().getTime() - startTime // get time elapsed
+				if (elapsedTime <= allowedTime){ // first condition for awipe met
+					if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
+						swipedir = (distX < 0)? 'left' : 'right' // if dist traveled is negative, it indicates left swipe
+					}
+					else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
+						swipedir = (distY < 0)? 'up' : 'down' // if dist traveled is negative, it indicates up swipe
+					}
+				}
+				handleswipe(swipedir)
+				//e.preventDefault()
+			})
+		}
+		
+		/* public API */		
 		this.showSlide = function(index){
 			_jR3DCarouselDiv.find('.nav').eq((index-1)%_noOfSlides).click();
 		}
@@ -387,6 +420,12 @@
 		}
 		this.showNextSlide = function(){
 			_nextButton.click();
+		}
+		this.playCarousel = function(){
+			_playjR3DCarousel();
+		}
+		this.pauseCarousel = function(){
+			_pausejR3DCarousel();
 		}
 
 		return this;

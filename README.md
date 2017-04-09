@@ -10,10 +10,10 @@ jR3DCarousel is a derived from the origin project - [jRCarousel](https://github.
 - Responsive
 - Fullscreen Carousel
 - Tiny plugin (gzipped ~ 2.01KB, uncompressed ~ 4.95KB)
-- Touch devices support
+- Keyboard navigation & mouse drag slide support
+- Touch devices navigation support
 - Infinite scroll
 - Multiple slideLayouts to maintain aspect ratio of images
-- Keyboard navigation & mouse drag slide support
 - Minimal configuration, easy to install
 - Useful public API for extending the functionalities like custom nav buttons.
  
@@ -75,7 +75,7 @@ $('.jR3DCarouselGallery').jR3DCarousel({
 	animationDuration: 400,    	/* animation speed in milliseconds */
 	animationInterval: 4000,	/* Interval between transitions or per slide show time in milliseconds */
 	autoplay: true,         	/* start playing Carousel continuously, pauses when slide is hovered */
-	onSlideShow: shown,			/* callback when Slide show event occurs */
+	onSlideShow: shownCallback,	/* callback when Slide show event occurs */
 	navigation: 'circles'		/* circles | squares | '' */
 });
 ```
@@ -109,6 +109,12 @@ $('.jR3DCarouselGallery').jR3DCarousel({
 
 - ##### getCurrentSlide()		:
 		returns the current slide's jQuery object
+		
+- ##### playCarousel()		:
+		starts the carousel & plays on
+		
+- ##### pauseCarousel()		:
+		pauses the carousel
 
 - ###### Usage
 ```
