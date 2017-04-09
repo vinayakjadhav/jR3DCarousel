@@ -68,18 +68,19 @@ $('.jR3DCarouselGallery')
 ##### Configuring all available options
 ```
 $('.jR3DCarouselGallery').jR3DCarousel({
- 	width : 1349,					/* largest allowed width */
-	height: 668,					/* largest allowed height */
-	slides : [{},{}], 				/* array of images source, optional in case of custom template  */
-	slideLayout : 'fill', 			/* "contain"-fit as per to aspect ratio | "fill"-stretches to fill |  "cover"-overflows but maintains ratio */
-	perspective: 0,					/* perspective - default is dynamic, perpendicular */
+ 	width :1349,				/* largest allowed width */
+	height: 668,				/* largest allowed height */
+	slides : [{},{}], 			/* array of images source, optional in case of custom template  */
+	slideLayout : 'fill', 			/* "contain"-fit as per to aspect ratio | "fill"-stretches to fill |
+						   "cover"-overflows but maintains ratio */
+	perspective: 0,				/* perspective - default is dynamic, perpendicular */
 	animation: 'slide3D', 			/* slide | slide3D | scroll | scroll3D | fade */
 	animationCurve: 'ease',			/* ease | ease-in | ease-out | ease-in-out | linear | bezier */
 	animationDuration: 700,			/* duration of animation transition in milliseconds */
 	animationInterval: 2000,		/* interval between transitions or per slide show time in milliseconds */
-	autoplay: true,					/* start playing Carousel continuously, pauses when slide is hovered  */
-	controls: true,					/* control buttons */
-	slideClass: 'jR3DCarouselSlide',/* name of the class of slides in custom template */
+	autoplay: true,				/* start playing Carousel continuously, pauses when slide is hovered  */
+	controls: true,				/* control buttons */
+	slideClass: 'jR3DCarouselSlide',	/* name of the class of slides in custom template */
 	navigation: 'circles',			/* circles | squares | '' */
 	onSlideShow: function(){}		/* callback when slide show event occurs */
 });
@@ -130,10 +131,9 @@ $('.jR3DCarouselGallery')
 
 - ###### Sample Usage of public API
 ```
-var myjR3DCarousel = $('.jR3DCarouselGallery')
-					.jR3DCarousel({
-						slides: slides
-					});
+var myjR3DCarousel = $('.jR3DCarouselGallery').jR3DCarousel({
+							slides: slides
+						});
 
 myjR3DCarousel.showSlide(0);
 myjR3DCarousel.showPreviousSlide();
