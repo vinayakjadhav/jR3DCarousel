@@ -47,14 +47,13 @@
 	     clearInterval(i);
 		$('.jRCarouselGallery').empty();
 		setUp();
-		jR3DCarousel.showNextSlide();
 	})
 	
 	$('[name=slides]').change(function(){
 		carouselProps[this.name] = getSlides(this.value); 
 		for (var i = 0; i < 99999; i++)
 	     clearInterval(i);
-		$('.jRCarouselGallery').empty(); setUp(); jR3DCarousel.showNextSlide();
+		$('.jRCarouselGallery').empty(); setUp();
 	});
 	
 	function getSlides(no){
@@ -173,9 +172,9 @@
 	 <label class="btn btn-primary btn-sm"><input type="radio" name="animationCurve" value="cubic-bezier(0.4, 0.6, 0.11, 0.19)" />cubic-bezier(0.4,0.6,0.11,0.19) curve</label>
 	</div>
 	<div>
-	  Slides  <input type="number" min="1" max="16" value="7" name="slides" style="color: black;" /> 
+	  Slides  <input type="number" value="7" name="slides" style="color: black;" /> 
 	 <span class="carousel-props" > 
-	  Perspective	<input type="number" min="0" max="2000" name="perspective" step="10" value="0" style="color: black;" />
+	  Perspective	<input type="number" name="perspective" step="10" value="0" style="color: black;" />
 		</span>
 	</div>
 	<!--<div class="carousel-props" >
@@ -183,8 +182,8 @@
 	 Height  <input type="range" min="200" max="720" val="276" name="height" />
 	</div>-->
 	<div class="carousel-props" >
-	 animationDuration  <input type="range" min="100" max="2000" val="700" name="animationDuration" />
-	 animationInterval <input type="range" min="100" max="2000" val="1000" name="animationInterval" />
+	 animationDuration  <input type="range" val="700" name="animationDuration" />
+	 animationInterval <input type="range" val="1000" name="animationInterval" />
 	</div>
 	</div>
 	<div class="wrapper">
@@ -235,12 +234,14 @@
 <a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
 
 <ul>
-<li>Modern effects including 3D effects</li>
+<li>Modern effects</li>
+<li>Responsive</li>
 <li>Fullscreen Carousel</li>
-<li>Tiny plugin (gzipped ~ 2.08KB, uncompressed ~ 4.95KB)</li>
+<li>Tiny plugin (gzipped ~ 2.29KB, uncompressed ~ 6.86KB)</li>
+<li>Keyboard navigation & mouse drag slide support</li>
+<li>Touch devices navigation support</li>
 <li>Infinite scroll</li>
 <li>Multiple slideLayouts to maintain aspect ratio of images</li>
-<li>Keyboard navigation and mouse drag slide support</li>
 <li>Minimal configuration, easy to install</li>
 <li>Useful public API for extending the functionalities like custom nav buttons.</li>
 </ul>
