@@ -1,6 +1,6 @@
 {
   "name": "jr3dcarousel",
-  "version": "0.0.8",
+  "version": "1.0.0",
   "description": "jQuery Responsive 3D Carousel with modern effects",
   "main": "dist/jR3DCarousel.min.js",
   "scripts": {
