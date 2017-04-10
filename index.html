@@ -32,7 +32,7 @@
 						  
 				}
 	function setUp(){
- 		jR3DCarousel = $('.jR3DCarouselGallery').jR3DCarousel(carouselProps);
+ 		jR3DCarousel = $('.jR3DCarouselGallery').eq(0).jR3DCarousel(carouselProps);
 		$('.settings').html('<pre>$(".jR3DCarouselGallery").jR3DCarousel('+JSON.stringify(carouselProps, null, 4)+')</pre>')
 	}
 	function shown(slide){
@@ -45,7 +45,7 @@
 			carouselProps[this.name] = Number(this.value) || null; 
 		for(var i = 0; i < 99999; i++)
 	     clearInterval(i);
-		$('.jR3DCarouselGallery').empty();
+		$('.jR3DCarouselGallery').eq(0).empty();
 		setUp();
 	})
 	
@@ -53,7 +53,7 @@
 		carouselProps[this.name] = getSlides(this.value); 
 		for (var i = 0; i < 99999; i++)
 	     clearInterval(i);
-		$('.jR3DCarouselGallery').empty(); setUp();
+		$('.jR3DCarouselGallery').eq(0).empty(); setUp();
 	});
 	
 	function getSlides(no){
