@@ -15,7 +15,7 @@
     <script type="text/javascript">
         $(document).ready(function(){
             var slides = [];
-            var jR3DCarousel;
+            var jR3DCarouselDefault;
         	var carouselProps =  {
 			 		  width: 471, 			
 					  height: 276, 			
@@ -32,8 +32,8 @@
 						  
 				}
 	function setUp(){
- 		jR3DCarousel = $('.jR3DCarouselGallery').eq(0).jR3DCarousel(carouselProps);
-		$('.settings').html('<pre>$(".jR3DCarouselGallery").jR3DCarousel('+JSON.stringify(carouselProps, null, 4)+')</pre>')
+ 		jR3DCarouselDefault = $('.jR3DCarouselGalleryDefault').jR3DCarousel(carouselProps);
+		$('.settings').html('<pre>$(".jR3DCarouselGalleryDefault").jR3DCarousel('+JSON.stringify(carouselProps, null, 4)+')</pre>')
 	}
 	function shown(slide){
 		console.log("Slide shown: ", slide.find('img').attr('src'))
@@ -45,7 +45,7 @@
 			carouselProps[this.name] = Number(this.value) || null; 
 		for(var i = 0; i < 99999; i++)
 	     clearInterval(i);
-		$('.jR3DCarouselGallery').eq(0).empty();
+		$('.jR3DCarouselGalleryDefault').empty();
 		setUp();
 	})
 	
@@ -53,7 +53,8 @@
 		carouselProps[this.name] = getSlides(this.value); 
 		for (var i = 0; i < 99999; i++)
 	     clearInterval(i);
-		$('.jR3DCarouselGallery').eq(0).empty(); setUp();
+		$('.jR3DCarouselGalleryDefault').empty();
+		setUp();
 	});
 	
 	function getSlides(no){
@@ -81,7 +82,7 @@
 			  perspective: 1200
 				  
 		}
-	jR3DCarousel1 = $('.jR3DCarouselGallery').eq(1).jR3DCarousel(carouselProps1);
+	jR3DCarouselCustom = $('.jR3DCarouselGalleryCustom').jR3DCarousel(carouselProps1);
 		
 		
     });
@@ -105,13 +106,13 @@
 			    	padding: 0 34px;
     			}
     			.settings-container {
-				height: 299px!important;
+				height: 199px!important;
     			}
     			#FCS_c0696cef195d6254764984f09d514003_divFix{
     				position: fixed!important;
     			}
 		}
-	.jR3DCarouselGallery {
+	.jR3DCarouselGalleryDefault {
 		margin: 0 auto;
 	}
 	.settings-container {
@@ -150,7 +151,7 @@
     <section class="page-header">
       <a class="btn btn-danger btn-xs pull-right" href="http://vinayakjadhav.github.io/jR3DCarousel#disqus_thread">Count</a>
       <h1 class="project-name">jR3DCarousel - jQuery 3D Responsive Carousel</h1>
-      <div class="jR3DCarouselGallery"></div>
+      <div class="jR3DCarouselGalleryDefault"></div>
       <hr/>
       <section class="settings-container">
         <div class="wrapper">
@@ -213,12 +214,12 @@
 	</section>
 	<hr/>
       <h2 class="project-tagline">jQuery Responsive 3D Carousel</h2>
-      <a href="https://github.com/vinayakjadhav/jR3DCarousel" class="btn">View on GitHub</a>
+      <a href="https://github.com/vinayakjadhav/jR3DCarousel" target="_blank" class="btn">View on GitHub</a>
       <a href="https://github.com/vinayakjadhav/jR3DCarousel/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/vinayakjadhav/jR3DCarousel/tarball/master" class="btn">Download .tar.gz</a><br/>
 	<hr/>
 	<h4>jR3DCarousel - with custom slides template & perspective </h4>
-	<div class="jR3DCarouselGallery">
+	<div class="jR3DCarouselGalleryCustom">
 	      <div class="jR3DCarouselCustomSlide"><img src="https://unsplash.it/1327/772" />
 		<div class="captions">This is custom text slide 1</div>
 	      </div>
@@ -235,11 +236,12 @@
 		<div class="captions">This is custom text slide 5</div>
 	      </div>
 		<style>
-		.jR3DCarouselGallery .captions{
-			position: relative;
-			padding: 2px 0;
-			bottom:22px;
-			background: lightblue;				
+		.jR3DCarouselGalleryCustom .captions {
+			  position: relative;
+			  padding: 5px 0;
+			  bottom: 4px;
+			  color: white;
+			  background: #2eb127;
 		}
 		</style>
 	</div>
