@@ -231,7 +231,7 @@
 			})();
 			
 			visibilityCheck(function(){
-				if(visibilityCheck()){
+				if(visibilityCheck() && _settings.autoplay){
 					//console.log("vis")
 					_playjR3DCarousel();
 				}else{
