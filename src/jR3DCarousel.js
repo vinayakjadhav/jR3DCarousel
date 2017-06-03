@@ -15,18 +15,18 @@
 	
 	$.fn.jR3DCarousel = function(options){
 		var _defaults = {
-				width : 1349,					/* largest allowed width */
-				height: 668,					/* largest allowed height */
-				slides : [], 					/* array of images source, optional in case of custom template  */
+				width : innerWidth,			/* largest allowed width */
+				height: innerHeight,			/* largest allowed height */
+				slides : [], 				/* array of images source, optional in case of custom template  */
 				slideLayout : 'fill', 			/* contain | fill | cover */
-				perspective: 0,					/* perspective | default dynamic perpendicular */
+				perspective: 0,				/* perspective | default dynamic perpendicular */
 				animation: 'slide3D', 			/* slide | slide3D | scroll | scroll3D | fade */
 				animationCurve: 'ease',			/* ease | ease-in | ease-out | ease-in-out | linear | bezier */
 				animationDuration: 700,			/* speed of animation transition*/
 				animationInterval: 2000,		/* interval between transitions */
-				autoplay: true,					/* continuous play  */
-				controls: true,					/* control buttons */
-				slideClass: 'jR3DCarouselSlide',/* gets slides by 'slide' class */
+				autoplay: true,				/* continuous play  */
+				controls: true,				/* control buttons */
+				slideClass: 'jR3DCarouselSlide',	/* gets slides by 'slide' class */
 				navigation: 'circles',			/* circles | squares | '' */
 				onSlideShow: function(){}		/* callback when Slide show event occurs */
 		}
