@@ -69,13 +69,14 @@
 	var carouselPropsCustom =  {
 	 		  width: 470, 				/* largest allowed width */
 			  height: 272, 				/* largest allowed height */
-			  slideLayout : 'fill',     /* "contain" (fit according to aspect ratio), "fill" (stretches object to fill) and "cover" (overflows box but maintains ratio) */
+			  slideLayout : 'fill',     		/* "contain" (fit according to aspect ratio), "fill" (stretches object to fill) and "cover" (overflows box but maintains ratio) */
 			  animation: 'slide3D', 		/* slide | scroll | fade | zoomInSlide | zoomInScroll */
 			  animationCurve: 'ease',
 			  animationDuration: 1700,
 			  slideClass: 'jR3DCarouselCustomSlide',
 			  autoplay: false,
-			  navigation: ''	/* circles | squares | '' */,
+			  navigation: ''			/* circles | squares | '' */,
+	 		  rotationDirection: 'ltr',
 			  perspective: 1200				  
 		}
 	jR3DCarouselCustom = $('.jR3DCarouselGalleryCustom').jR3DCarousel(carouselPropsCustom);
