@@ -67,8 +67,14 @@
 				_createNavigation();
 			}
 			
+			/* adjust size according to device */
+			addEventListener('resize', _maintainResposive);
+			
+			_maintainResposive();
+			
 			/* start jR3DCarousel if autoplay */
 			if(_settings.autoplay){
+				
 				/* event handlers */
 				document.addEventListener('visibilitychange', function () {
 				    if (document.hidden) {
@@ -89,13 +95,10 @@
 					}, _settings.animationInterval+_settings.animationDuration));
 				});
 				
-				_playjR3DCarousel();	
+				/* start jR3DCarousel if autoplay */
+				_playjR3DCarousel();
+					
 			}
-			
-			/* adjust size according to device */
-			addEventListener('resize', _maintainResposive);
-			
-			_maintainResposive();
 			
 			function createjR3DCarousel(){
 				/* compute translate and perspective */
@@ -240,12 +243,15 @@
 		})();
 		
 		function _playjR3DCarousel(){
+			_pausejR3DCarousel();
 			_timer = setInterval(_playNextSlide, _settings.animationInterval+_settings.animationDuration);
-			//console.log("_playjR3DCarousel called");
+			//console.log("_playjR3DCarousel called "+_timer);
 		}
 		function _pausejR3DCarousel(){
-			clearInterval(_timer);
-			//console.log("_pausejR3DCarousel called");
+			if(_timer){
+				//console.log("_pausejR3DCarousel called "+_timer);
+				clearInterval(_timer);
+			}
 		}
 		
 		function _playNextSlide(){
