@@ -81,6 +81,7 @@ $('.jR3DCarouselGallery').jR3DCarousel({
 	controls: true,			/* control buttons */
 	slideClass: 'jR3DCarouselSlide',/* name of the class of slides in custom template */
 	navigation: 'circles',		/* circles | squares | '' */
+	rotationDirection: 'rtl',	/* rtl - right to left | ltr - left to right */
 	onSlideShow: function(){}	/* callback when slide show event occurs */
 });
 ```

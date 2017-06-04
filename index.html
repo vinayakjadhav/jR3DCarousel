@@ -9,15 +9,8 @@ body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	background: darkcyan;
-	overflow-x: hidden;
-}
-
-.container {
-	padding-right: 15px;
-	padding-left: 15px;
-	margin-right: auto;
-	margin-left: auto;
 	text-align: center;
+	overflow-x: hidden;
 }
 
 .jR3DCarouselGallery,.jR3DCarouselGalleryCustomeTemplate {
@@ -68,6 +61,7 @@ $(document).ready(function(){
 			  controls: true,			/* control buttons */
 			  navigation: ''			/* circles | squares | '' */,
 			  perspective: 2200,
+			  rotationDirection: 'ltr',
 			  onSlideShow: slideShownCallback
 				  
 		}

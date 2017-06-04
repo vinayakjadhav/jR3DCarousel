@@ -1,7 +1,7 @@
 /**
  * Author: Vinayak Rangnathrao Jadhav
  * Project: jR3DCarousel
- * Version: 1.0.2
+ * Version: 1.0.3
  **/
 (function (factory) {
     if (typeof define === "function" && define.amd) {
@@ -28,6 +28,7 @@
 				controls: true,					/* control buttons */
 				slideClass: 'jR3DCarouselSlide',/* name of the css class of slides in custom template */
 				navigation: 'circles',			/* circles | squares | '' */
+				rotationDirection: 'rtl',		/* rtl - right to left | ltr - left to right */
 				onSlideShow: function(){}		/* callback when Slide show event occurs */
 		}
 		
@@ -158,8 +159,14 @@
 			}
 			
 			function _createControls(){
-				_previousButton = $( "<div class='previous controls' style='left: 0.1em;'>&lang;</div>");
-				_nextButton = $( "<div class='next controls' style='right: 0.1em;'>&rang;</div>");
+				if(_settings.rotationDirection == 'rtl'){
+					_previousButton = $( "<div class='previous controls' style='left: 0.1em;'>&lang;</div>");
+					_nextButton = $( "<div class='next controls' style='right: 0.1em;'>&rang;</div>");
+				}else{
+					_previousButton = $( "<div class='previous controls' style='right: 0.1em;'>&rang;</div>");
+					_nextButton = $( "<div class='next controls' style='left: 0.1em;'>&lang;</div>");
+				}
+				
 				_previousButton.add(_nextButton)
 							   .css({position: 'absolute', top:'50%', zIndex:1, transform: 'translateY(-50%)', fontSize: '4em', color: 'rgba(255, 255, 255, 0.97)', cursor:'pointer', userSelect: 'none'})
 							   .appendTo(_container)
