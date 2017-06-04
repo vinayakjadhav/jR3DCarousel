@@ -14,9 +14,9 @@
     <script type="text/javascript" src="https://cdn.rawgit.com/vinayakjadhav/jR3DCarousel/v1.0.1/dist/jR3DCarousel.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            var slides = [];
-            var jR3DCarouselDefault;
-        	var carouselProps =  {
+		var slides = [];
+		//var jR3DCarouselDefault;
+		var carouselProps =  {
 			 		  width: 471, 			
 					  height: 276, 			
 					  slideLayout : 'fill',     
@@ -24,39 +24,18 @@
 					  animationCurve: 'ease',
 					  animationDuration: 1200,
 					  animationInterval: 2000,
-					  //slideClass: 'jR3DCarouselCustomSlide',
-					  //autoplay: false,
-					  onSlideShow: shown,	
+					  autoplay: true,
+					  onSlideShow: slideShownCallback,	
 					  navigation: 'circles',
-					  slides: slides
-						  
+					  slides: slides				  
 				}
 	function setUp(){
  		jR3DCarouselDefault = $('.jR3DCarouselGalleryDefault').jR3DCarousel(carouselProps);
 		$('.settings').html('<pre>$(".jR3DCarouselGalleryDefault").jR3DCarousel('+JSON.stringify(carouselProps, null, 4)+')</pre>')
 	}
-	function shown(slide){
-		console.log("Slide shown: ", slide.find('img').attr('src'))
+	function slideShownCallback($slide){
+		console.log("Slide shown: ", $slide.find('img').attr('src'))
 	}
-	$('.carousel-props input').change(function(){
-		if(isNaN(this.value))
-			carouselProps[this.name] = this.value || null; 
-		else
-			carouselProps[this.name] = Number(this.value) || null; 
-		for(var i = 0; i < 99999; i++)
-	     clearInterval(i);
-		$('.jR3DCarouselGalleryDefault').empty();
-		setUp();
-	})
-	
-	$('[name=slides]').change(function(){
-		carouselProps[this.name] = getSlides(this.value); 
-		for (var i = 0; i < 99999; i++)
-	     clearInterval(i);
-		$('.jR3DCarouselGalleryDefault').empty();
-		setUp();
-	});
-	
 	function getSlides(no){
 		slides = [];
 		for ( var i = 0; i < no; i++) {
@@ -64,10 +43,30 @@
 		}
 		return slides;
 	}
-	
 	carouselProps.slides = getSlides(7);
 	setUp();
-	var carouselProps1 =  {
+		
+	$('.carousel-props input').change(function(){
+		if(isNaN(this.value))
+			carouselProps[this.name] = this.value || null; 
+		else
+			carouselProps[this.name] = Number(this.value) || null; 
+		for(var i = 9999; i > 0 ; i--)
+	     		clearInterval(i);
+		$('.jR3DCarouselGalleryDefault').empty();
+		setUp();
+	})
+	
+	$('[name=slides]').change(function(){
+		carouselProps[this.name] = getSlides(this.value); 
+		for(var i = 9999; i > 0 ; i--)
+	     		clearInterval(i);
+		$('.jR3DCarouselGalleryDefault').empty();
+		setUp();
+	});
+	
+	
+	var carouselPropsCustom =  {
 	 		  width: 470, 				/* largest allowed width */
 			  height: 272, 				/* largest allowed height */
 			  slideLayout : 'fill',     /* "contain" (fit according to aspect ratio), "fill" (stretches object to fill) and "cover" (overflows box but maintains ratio) */
@@ -77,12 +76,10 @@
 			  animationInterval: 2000,
 			  slideClass: 'jR3DCarouselCustomSlide',
 			  autoplay: false,
-			  onSlideShow: shown,	/* callback when Slide show event occurs */
 			  navigation: 'circles'	/* circles | squares */,
-			  perspective: 1200
-				  
+			  perspective: 1200				  
 		}
-	jR3DCarouselCustom = $('.jR3DCarouselGalleryCustom').jR3DCarousel(carouselProps1);
+	jR3DCarouselCustom = $('.jR3DCarouselGalleryCustom').jR3DCarousel(carouselPropsCustom);
 		
 		
     });
