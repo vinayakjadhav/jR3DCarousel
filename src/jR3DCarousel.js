@@ -1,7 +1,7 @@
 /**
  * Author: Vinayak Rangnathrao Jadhav
  * Project: jR3DCarousel
- * Version: 1.0.1
+ * Version: 1.0.2
  **/
 (function (factory) {
     if (typeof define === "function" && define.amd) {
@@ -76,7 +76,13 @@
 			if(_settings.autoplay){
 				
 				/* event handlers */
-				document.addEventListener('visibilitychange', function () {
+				document.addEventListener('visibilitychange', handleVisibilityChange);
+				
+				addEventListener("beforeunload", function () {
+					  document.removeEventListener('visibilitychange', handleVisibilityChange);
+				});
+				
+				function handleVisibilityChange() {
 				    if (document.hidden) {
 				        //console.log("hidden.. stop running expensive task")
 						_pausejR3DCarousel();
@@ -84,7 +90,7 @@
 				        //console.log("not hidden.. page has focus, begin running task")
 						_playjR3DCarousel();
 				    }
-				});
+				}
 				
 				_container.hover(function(){
 					clearTimeout($(this).data('timeout'));
@@ -175,17 +181,15 @@
 					_previousButton.add(_nextButton).hide();
 				})
 				
-				_previousButton.mousedown(function(){
-					_previousButton.html('&langd;');
-				})
-				.mouseup(function(){
-					_previousButton.html('&lang;');
+				_previousButton.hover(function(){
+					_previousButton.css({color: 'rgba(201, 201, 201, 0.97)'});
+				},function(){
+					_previousButton.css({color: 'rgba(255, 255, 255, 0.97)'});
 				});
-				_nextButton.mousedown(function(){
-					_nextButton.html('&rangd;');
-				})
-				.mouseup(function(){
-					_nextButton.html('&rang;');
+				_nextButton.hover(function(){
+					_nextButton.css({color: 'rgba(201, 201, 201, 0.97)'});
+				},function(){
+					_nextButton.css({color: 'rgba(255, 255, 255, 0.97)'});
 				});
 				
 				/* keyboard navigation keys support */
