@@ -1,7 +1,7 @@
 /**
  * Author: Vinayak Rangnathrao Jadhav
  * Project: jR3DCarousel
- * Version: 1.0.3
+ * Version: 1.0.4
  **/
 (function (factory) {
     if (typeof define === "function" && define.amd) {
@@ -208,10 +208,18 @@
 					
 					if(inView && e.which == 37){
 						_pausejR3DCarousel();
-						_previousButton.click();
+						if(_settings.rotationDirection == 'rtl'){
+							_previousButton.click();
+						}else{
+							_nextButton.click();
+						}
 					}else if(inView && e.which == 39){
 						_pausejR3DCarousel();
-						_nextButton.click();
+						if(_settings.rotationDirection == 'rtl'){
+							_nextButton.click();
+						}else{
+							_previousButton.click();
+						}
 					}
 				});
 				
