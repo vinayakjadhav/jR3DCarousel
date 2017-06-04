@@ -3,28 +3,59 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>jR3DCarousel - a jQuery 3D Responsive Carousel</title>
+
+<style type="text/css">
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	background: darkcyan;
+	overflow-x: hidden;
+}
+
+.container {
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+}
+
+.jR3DCarouselGallery,.jR3DCarouselGalleryCustomeTemplate {
+	margin: 0 auto; /* optional - if want to center align */
+}
+</style>
+<style>
+.jR3DCarouselGalleryCustomeTemplate .captions{
+	position: relative;
+	padding: 4px 0;
+	bottom: 27px;
+	background: #ec1c8e;
+	display:block			
+}
+.jR3DCarouselGalleryCustomeTemplate a{
+	text-decoration: none;			
+}
+</style>
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="dist/jR3DCarousel.min.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){
-	var slides = [{src: '../jRCarousel/images/01.jpg'}, {src: '../jRCarousel/images/02.jpg'}, {src: '../jRCarousel/images/03.jpg'}, {src: '../jRCarousel/images/04.jpg'},{src: '../jRCarousel/images/05.jpg'}]
+	var slideImages = [ {src: '../jRCarousel/images/01.jpg'},
+	              		{src: '../jRCarousel/images/02.jpg'},
+	              		{src: '../jRCarousel/images/03.jpg'},
+	              		{src: '../jRCarousel/images/04.jpg'},
+	              		{src: '../jRCarousel/images/05.jpg'} ]
 	//var jR3DCarousel;
-	var carouselProps =  {
-					  width: 470, 				/* largest allowed width */
-		  			  height: 272, 				/* largest allowed height */
-			 		  slideLayout : 'fill',     /* "contain" (fit according to aspect ratio), "fill" (stretches object to fill) and "cover" (overflows box but maintains ratio) */
-					  animation: 'slide3D', 	/* slide | scroll | fade | zoomInSlide | zoomInScroll */
-					  animationCurve: 'ease',
-					  animationDuration: 1000,
-					  animationInterval: 1600,
-					  //slideClass: 'jR3DCarouselCustomSlide',
-					  autoplay: true,
-					  onSlideShow: show,		/* callback when Slide show event occurs */
-					  navigation: 'circles',	/* circles | squares */
-					  slides: slides 			/* array of images source or gets slides by 'slide' class */						  
-				}
 	
-	var carouselProps1 =  {
+	jR3DCarousel = $('.jR3DCarouselGallery').jR3DCarousel({
+								  					width: 470, 		/* largest allowed width */
+													height: 272, 		/* largest allowed height */
+						 		  					slides: slideImages /* array of images source */						  
+											 });
+	
+	var carouselCustomeTemplateProps =  {
 	 		  width: 470, 				/* largest allowed width */
 			  height: 272, 				/* largest allowed height */
 			  slideLayout : 'fill',     /* "contain" (fit according to aspect ratio), "fill" (stretches object to fill) and "cover" (overflows box but maintains ratio) */
@@ -34,178 +65,58 @@ $(document).ready(function(){
 			  animationInterval: 2000,
 			  slideClass: 'jR3DCarouselCustomSlide',
 			  autoplay: false,
-			  onSlideShow: show,		/* callback when Slide show event occurs */
+			  controls: true,			/* control buttons */
 			  navigation: ''			/* circles | squares | '' */,
-			  perspective: 2200
+			  perspective: 2200,
+			  onSlideShow: slideShownCallback
 				  
 		}
-	
-	function setUp(){
- 		jR3DCarousel = $('.jR3DCarouselGallery').eq(0).jR3DCarousel(carouselProps);
- 		
-		$('.settings').html('<pre>$(".jR3DCarouselGallery").jR3DCarousel('+JSON.stringify(carouselProps, null, 4)+')</pre>');		
-		
+	function slideShownCallback($slide){
+		console.log("Slide shown: ", $slide.find('img').attr('src'))
 	}
-	function show(slide){
-		console.log("Slide shown: ", slide.find('img').attr('src'))
-	}
-	$('.carousel-props input').change(function(){
-		if(isNaN(this.value))
-			carouselProps[this.name] = this.value || null; 
-		else
-			carouselProps[this.name] = Number(this.value) || null; 
-		
-		for(var i = 0; i < 999; i++)
-	     clearInterval(i);
-		$('.jR3DCarouselGallery').eq(0).empty();
-		setUp();
-		//jR3DCarousel.showNextSlide();
-	})
-	
-	$('[name=slides]').change(function(){
-		carouselProps[this.name] = getSlides(this.value); 
-		for (var i = 0; i < 999; i++)
-	     clearInterval(i);
-		$('.jR3DCarouselGallery').eq(0).empty();
-		setUp();
-		//jR3DCarousel.showNextSlide();		
-	});
-	
-	function getSlides(no){
-		slides = [];
-		for ( var i = 0; i < no; i++) {
-			slides.push({src: 'https://unsplash.it/'+Math.floor(1366-Math.random()*200)+'/'+Math.floor(768+Math.random()*200)})
-		}
-		return slides;
-	}
-	
-	//carouselProps.slides = getSlides(7);
-	setUp()
-	jR3DCarousel1 = $('.jR3DCarouselGallery').eq(1).jR3DCarousel(carouselProps1);
+
+	jR3DCarouselCustomeTemplate = $('.jR3DCarouselGalleryCustomeTemplate').jR3DCarousel(carouselCustomeTemplateProps);
 
   })
 </script>
 
-<style type="text/css">
-body {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 14px;
-	background: darkcyan;
-}
-
-.container {
-	padding-right: 15px;
-	padding-left: 15px;
-	margin-right: auto;
-	margin-left: auto;
-	overflow: hidden;
-}
-.galleries{
-}
-
-.jR3DCarouselGallery,.jR3DCarouselGallery1 {
-	margin: 0 auto; /* optional - if want to center align */
-}
-
-.container {
-	text-align: center;
-}
-
-.wrapper {
-	padding-right: 10px;
-	padding-left: 10px;
-	width: 48%;
-	height: 299px;
-	float: left;
-	overflow: auto;
-	border-left: 1px solid #999;
-}
-
-.wrapper div {
-	margin: 8px auto;
-}
-</style>
 </head>
 
 <body>
-<div class="container">
-	<h1>jR3DCarousel - jQuery 3D Responsive Carousel</h1>
-	<div class="galleries" style="floa:left">
-		<h4>jR3DCarousel - with default options</h4>
-		<div class="jR3DCarouselGallery"></div>			
-	</div>
-		 
-	<div class="galleries" style="flot:right">
-		<h4>jR3DCarousel - with custom slides template & perspective </h4>
-		<div class="jR3DCarouselGallery">
-			<div class="jR3DCarouselCustomSlide"><img src="../jRCarousel/images/01.jpg" /><div class="captions">This is custom text slide 1</div></div>
-			<div class="jR3DCarouselCustomSlide"><img src="../jRCarousel/images/02.jpg" /><div class="captions">This is custom text slide 2</div></div>
-			<div class="jR3DCarouselCustomSlide"><img src="../jRCarousel/images/03.jpg" /><div class="captions">This is custom text slide 3</div></div>
-			<div class="jR3DCarouselCustomSlide"><img src="../jRCarousel/images/04.jpg" /><div class="captions">This is custom text slide 4</div></div>
-			<div class="jR3DCarouselCustomSlide"><img src="../jRCarousel/images/05.jpg" /><div class="captions">This is custom text slide 5</div></div>
-			<style>
-			.jR3DCarouselGallery .captions{
-				position: relative;
-				padding: 2px 0;
-				bottom:22px;
-				background: rgba(238, 238, 238, 0.69);				
-			}
-			</style>
+	<div class="container">
+		<h1>jR3DCarousel - jQuery 3D Responsive Carousel</h1>
+		<h2>jR3DCarousel - with default options</h2>
+		<div class="jR3DCarouselGallery"></div>
+		<br /> <br />
+		<br /> <br />
+		
+		<h2>jR3DCarousel - with custom slides template & perspective</h2>
+		<div class="jR3DCarouselGalleryCustomeTemplate">
+			<div class="jR3DCarouselCustomSlide">
+				<img src="../jRCarousel/images/01.jpg" />
+				<div class="captions">This is custom text slide 1</div>
+			</div>
+			<div class="jR3DCarouselCustomSlide">
+				<a href="http://vinayakjadhav.github.io/jR3DCarousel/" target="_blank">
+					<img src="../jRCarousel/images/02.jpg" />
+					<span class="captions">This is clickable slide 2</span>
+				</a>				
+			</div>
+			<div class="jR3DCarouselCustomSlide">
+				<img src="../jRCarousel/images/03.jpg" />
+				<div class="captions">This is custom text slide 3</div>
+			</div>
+			<div class="jR3DCarouselCustomSlide">
+				<img src="../jRCarousel/images/04.jpg" />
+				<div class="captions">This is custom text slide 4</div>
+			</div>
+			<div class="jR3DCarouselCustomSlide">
+				<img src="../jRCarousel/images/05.jpg" />
+				<div class="captions">This is custom text slide 5</div>
+			</div>
 		</div>
+		<br /> <br />
+		<br /> <br />
 	</div>
-</div>
-<br/>
-<hr/>
-<div class="wrapper">
-	<h2>Options for setting jR3DCarousel 1</h2>
-	<div class="carousel-props" >
-	 <input type="radio" name="animation" value="slide" />slide
-	 <input type="radio" name="animation" value="slide3D" checked="checked" />slide3D
-	 <input type="radio" name="animation" value="scroll"  />scroll
-	 <input type="radio" name="animation" value="scroll3D"  />scroll3D
-	 <input type="radio" name="animation" value="fade"  />fade
-	</div>
-	<div class="carousel-props" >
-	 <input type="radio" name="slideLayout" value="fill" checked="checked" />fill
-	 <input type="radio" name="slideLayout" value="contain"  />contain
-	 <input type="radio" name="slideLayout" value="cover"  />cover
-	</div>
-	<div class="carousel-props" >
-	 <input type="radio" name="animationCurve" value="ease" checked="checked" />ease
-	 <input type="radio" name="animationCurve" value="ease-in"  />ease-in
-	 <input type="radio" name="animationCurve" value="ease-out"  />ease-out
-	 <input type="radio" name="animationCurve" value="ease-in-out"  />ease-in-out
-	 <input type="radio" name="animationCurve" value="linear"  />linear
-	 <input type="radio" name="animationCurve" value="cubic-bezier(0.4, 0.6, 0.11, 0.19)"  />cubic-bezier(0.4, 0.6, 0.11, 0.19) curve
-	</div>
-	<div class="carousel-props" >
-	 <input type="radio" name="navigation" value="circles" checked="checked" />circles
-	 <input type="radio" name="navigation" value="squares"  />squares
-	 <input type="radio" name="navigation" value="" />None
-	</div>
-	<div class="carousel-props" >
-	 <input type="radio" name="autoplay" value="true" checked="checked" />autoplay
-	 <input type="radio" name="autoplay" value=""  />manual
-	</div>
-	<div>
-	 	<input type="number" min="1" max="16" value="4" name="slides" /> Slides 
-	 	<span class="carousel-props" >
-		<input type="number" name="perspective" step="10" value="0" /> Perspective
-		</span>
-	</div>
-	<div class="carousel-props" >
-	 	<input type="range" name="animationDuration" />animationDuration
-		<input type="range" name="animationInterval" />animationInterval
-	</div>
-	<div class="carousel-props" >
-		<input type="range" name="width" />Width
-		<input type="range" name="height" />Height
-	</div>
-	</div>
-<div class="wrapper">
-		<h2>Code to getting started</h2>
-		<div class="settings"></div>
-		<!-- <iframe width="100%" height="40" src="https://jsfiddle.net/vinayakjadhav/3KBFR/embedded/result" allowfullscreen="allowfullscreen" frameborder="0"></iframe> -->		
-</div>
 </body>
 </html>
