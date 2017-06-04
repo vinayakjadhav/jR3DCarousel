@@ -1,7 +1,7 @@
 /**
  * Author: Vinayak Rangnathrao Jadhav
  * Project: jR3DCarousel
- * Version: 1.0.0
+ * Version: 1.0.1
  **/
 (function (factory) {
     if (typeof define === "function" && define.amd) {
@@ -15,21 +15,22 @@
 	
 	$.fn.jR3DCarousel = function(options){
 		var _defaults = {
-				width : innerWidth,			/* largest allowed width */
+				width : innerWidth,				/* largest allowed width */
 				height: innerHeight,			/* largest allowed height */
-				slides : [], 				/* array of images source, optional in case of custom template  */
+				slides : [], 					/* array of images source, optional in case of custom template  */
 				slideLayout : 'fill', 			/* contain | fill | cover */
-				perspective: 0,				/* perspective | default dynamic perpendicular */
+				perspective: 0,					/* perspective - default is dynamic, perpendicular */
 				animation: 'slide3D', 			/* slide | slide3D | scroll | scroll3D | fade */
 				animationCurve: 'ease',			/* ease | ease-in | ease-out | ease-in-out | linear | bezier */
-				animationDuration: 700,			/* speed of animation transition*/
-				animationInterval: 2000,		/* interval between transitions */
-				autoplay: true,				/* continuous play  */
-				controls: true,				/* control buttons */
-				slideClass: 'jR3DCarouselSlide',	/* gets slides by 'slide' class */
+				animationDuration: 700,			/* duration of animation transition in milliseconds*/
+				animationInterval: 2000,		/* interval between transitions or show time of per slide in milliseconds */
+				autoplay: true,					/* start playing Carousel continuously, pauses when slide is hovered  */
+				controls: true,					/* control buttons */
+				slideClass: 'jR3DCarouselSlide',/* name of the css class of slides in custom template */
 				navigation: 'circles',			/* circles | squares | '' */
 				onSlideShow: function(){}		/* callback when Slide show event occurs */
 		}
+		
 		var _settings = $.extend( true, {}, _defaults, options );
 		var _container = this;
 		var _width = _settings.width;
@@ -68,14 +69,27 @@
 			
 			/* start jR3DCarousel if autoplay */
 			if(_settings.autoplay){
-				_playjR3DCarousel();
-				
 				/* event handlers */
-				_container.hover(function(){
-					_pausejR3DCarousel();
-				},function(){
-					_playjR3DCarousel();
+				document.addEventListener('visibilitychange', function () {
+				    if (document.hidden) {
+				        //console.log("hidden.. stop running expensive task")
+						_pausejR3DCarousel();
+				    } else {
+				        //console.log("not hidden.. page has focus, begin running task")
+						_playjR3DCarousel();
+				    }
 				});
+				
+				_container.hover(function(){
+					clearTimeout($(this).data('timeout'));
+					_pausejR3DCarousel();					
+				},function(){					
+					$(this).data('timeout', setTimeout(function(){
+												_playjR3DCarousel();
+					}, _settings.animationInterval+_settings.animationDuration));
+				});
+				
+				_playjR3DCarousel();	
 			}
 			
 			/* adjust size according to device */
@@ -135,10 +149,11 @@
 			}
 			
 			function _createControls(){
-				_previousButton = $( "<div class='previous controls' style='left: 8px; transform: rotate(-45deg);'></div>");
-				_nextButton = $( "<div class='next controls' style='right: 8px; transform: rotate(135deg);'></div>");
-				_previousButton.add(_nextButton).appendTo(_container)
-							   .css({position: 'absolute', top:'42%', zIndex:1, display: 'inline-block', padding: '1.2em', boxShadow: '2px 2px 0 rgba(255,255,255,0.9) inset', cursor:'pointer'})
+				_previousButton = $( "<div class='previous controls' style='left: 0.1em;'>&lang;</div>");
+				_nextButton = $( "<div class='next controls' style='right: 0.1em;'>&rang;</div>");
+				_previousButton.add(_nextButton)
+							   .css({position: 'absolute', top:'50%', zIndex:1, transform: 'translateY(-50%)', fontSize: '4em', color: 'rgba(255, 255, 255, 0.97)', cursor:'pointer', userSelect: 'none'})
+							   .appendTo(_container)
 							   .hide();
 				
 				 /* event handlers */
@@ -151,10 +166,23 @@
 				
 				/* event handlers */
 				_container.on('mouseenter touchstart',function(){
-					_previousButton.add(_nextButton).fadeIn();
+					_previousButton.add(_nextButton).show();
 				})
 				.on('mouseleave touchcancel',function(){
-					_previousButton.add(_nextButton).fadeOut();
+					_previousButton.add(_nextButton).hide();
+				})
+				
+				_previousButton.mousedown(function(){
+					_previousButton.html('&langd;');
+				})
+				.mouseup(function(){
+					_previousButton.html('&lang;');
+				});
+				_nextButton.mousedown(function(){
+					_nextButton.html('&rangd;');
+				})
+				.mouseup(function(){
+					_nextButton.html('&rang;');
 				});
 				
 				/* keyboard navigation keys support */
@@ -209,37 +237,6 @@
 				});
 			}
 			
-			var visibilityCheck = (function(){
-				var stateKey, eventKey, keys = {
-					hidden: "visibilitychange",
-					webkitHidden: "webkitvisibilitychange",
-					mozHidden: "mozvisibilitychange",
-					msHidden: "msvisibilitychange"
-				};
-				for (stateKey in keys) {
-					if (stateKey in document) {
-						eventKey = keys[stateKey];
-						break;
-					}
-				}
-				return function(callback) {
-					if (callback) {
-						document.addEventListener(eventKey, callback);
-					}
-					return !document[stateKey];
-				}
-			})();
-			
-			visibilityCheck(function(){
-				if(visibilityCheck() && _settings.autoplay){
-					//console.log("vis")
-					_playjR3DCarousel();
-				}else{
-					//console.log("not vis")
-					_pausejR3DCarousel();
-				}
-			});
-						
 		})();
 		
 		function _playjR3DCarousel(){
