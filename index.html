@@ -45,6 +45,7 @@
 	     		clearInterval(i);
  		jR3DCarouselDefault.empty();
 		//$('.jR3DCarouselGalleryDefault').css({});
+		jR3DCarouselDefault = $('.jR3DCarouselGalleryDefault').jR3DCarousel(carouselProps);
 		$('.settings').html('<pre>$(".jR3DCarouselGalleryDefault").jR3DCarousel('+JSON.stringify(carouselProps, null, 4)+')</pre>')
 	}
 	function slideShownCallback($slide){
