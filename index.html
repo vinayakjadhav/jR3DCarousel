@@ -25,6 +25,7 @@
 					  animationDuration: 1200,
 					  animationInterval: 2000,
 					  autoplay: true,
+					  rotationDirection: 'ltr',
 					  onSlideShow: slideShownCallback,	
 					  navigation: 'circles',
 					  slides: slides				  
@@ -39,7 +40,8 @@
 	carouselProps.slides = getSlides(7);
 	
 	jR3DCarouselDefault = $('.jR3DCarouselGalleryDefault').jR3DCarousel(carouselProps);
-	
+		
+	$('.settings').html('<pre>$(".jR3DCarouselGalleryDefault").jR3DCarousel('+JSON.stringify(carouselProps, null, 4)+')</pre>')
 	function redraw(){
 		for(var i = 9999; i > 0 ; i--)
 	     		clearInterval(i);
@@ -51,12 +53,11 @@
 	function slideShownCallback($slide){
 		console.log("Slide shown: ", $slide.find('img').attr('src'))
 	}
-	
+		
 	$('.carousel-props input').change(function(){
 		carouselProps[this.name] =  isNaN(this.value) ? (this.value || null) : (Number(this.value) || null);
 		redraw();
 	})
-	
 	$('[name=slides]').change(function(){
 		carouselProps[this.name] = getSlides(this.value); 
 		redraw();
@@ -72,7 +73,7 @@
 			  slideClass: 'jR3DCarouselCustomSlide',
 			  autoplay: false,
 			  navigation: ''			/* circles | squares | '' */,
-	 		  rotationDirection: 'ltr',
+	 		  rotationDirection: 'rtl',
 			  perspective: 1200				  
 		}
 	jR3DCarouselCustom = $('.jR3DCarouselGalleryCustom').jR3DCarousel(carouselPropsCustom);
