@@ -1,7 +1,7 @@
 /**
  * Author: Vinayak Rangnathrao Jadhav
  * Project: jR3DCarousel
- * Version: 1.0.4
+ * Version: 1.0.5
  **/
 (function (factory) {
     if (typeof define === "function" && define.amd) {
@@ -430,7 +430,8 @@
 		
 		/* public API */		
 		this.showSlide = function(index){
-			_jR3DCarouselDiv.find('.nav').eq((index-1)%_noOfSlides).click();
+			var relativeSlideIndex = index % _noOfSlides;
+			_playSlideByIndex(relativeSlideIndex);
 		}
 		this.getCurrentSlide = function(){
 			return _getCurrentSlide();

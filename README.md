@@ -9,7 +9,7 @@ jR3DCarousel is a derived from the origin project - [jRCarousel](https://github.
 - Modern effects
 - Responsive
 - Fullscreen Carousel
-- Tiny plugin (gzipped ~ 2.28KB, uncompressed ~ 7.04KB)
+- Tiny plugin (gzipped ~ 2.33KB, uncompressed ~ 7.29KB)
 - Keyboard navigation & mouse drag slide support
 - Touch devices navigation support
 - Infinite scroll
