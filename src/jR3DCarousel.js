@@ -127,7 +127,7 @@
 				if(_settings.slides.length){					
 					for(var i = 0;  i < _settings.slides.length; i++){
 						var slide = $( "<div class='jR3DCarouselSlide' data-index="+i+" />" )
-									.append( "<img src='"+_settings.slides[i].src+"' alt='"+_settings.slides[i].alt+"' />" );
+									.append( "<img loading='lazy' src='"+_settings.slides[i].src+"' alt='"+_settings.slides[i].alt+"' />" );
 						if(_settings.animation.indexOf('slide')!=-1){
 							_transform = 'rotateY('+_baseAngle*i+'deg) translateZ('+_translateZ+'px)';
 						}else if(_settings.animation.indexOf('scroll')!=-1){
